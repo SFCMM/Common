@@ -3,7 +3,7 @@ project(common)
 project(common VERSION "1")
 
 add_subdirectory(UnitTest)
-#add_subdirectory(perf)
+add_subdirectory(perf)
 
 set(CMAKE_CXX_STANDARD 17)
 

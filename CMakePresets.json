@@ -131,9 +131,9 @@
       "description": "Release build using Ninja generator",
       "binaryDir": "${sourceDir}/build/release-clang",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CXX_FLAGS": "$env{APP_CLANG_DEFAULT_FLAGS} -O3 -fvectorize -fslp-vectorize -march=native -mtune=native"
+        "CMAKE_CXX_FLAGS": "$env{APP_CLANG_DEFAULT_FLAGS} -O3 -fvectorize -fslp-vectorize -mavx"
       }
     }
   ],
