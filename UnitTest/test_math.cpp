@@ -1,5 +1,6 @@
+#include <sfcmm_common.h>
 #include "gtest/gtest.h"
-#include "math/mathfunctions.h"
+//#include "math/mathfunctions.h"
 
 TEST(MathApprox, HandlesZeroInput) {
   const double eps = std::numeric_limits<double>::epsilon();

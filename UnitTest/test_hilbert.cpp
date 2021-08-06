@@ -1,5 +1,6 @@
+#include <sfcmm_common.h>
 #include "gtest/gtest.h"
-#include "math/hilbert.h"
+//#include "math/hilbert.h"
 
 TEST(HilbertIndex2D, HandlesZeroInput) {
   VectorD<2> quadrant0 = {0, 0};

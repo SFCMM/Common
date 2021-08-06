@@ -5,7 +5,7 @@
 #include <iostream>
 #include <map>
 #include <sstream>
-#include "common/types.h"
+#include "common/sfcmm_types.h"
 
 /// Get a stringstream from a given std::vector. Type needs to overload "<<".
 /// \tparam LENGTH Length of the vector to be streamed.

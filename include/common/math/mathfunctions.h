@@ -2,7 +2,7 @@
 #define MATHFUNCTIONS_H
 #include <cmath>
 #include <gcem.hpp>
-#include "common/types.h"
+#include "common/sfcmm_types.h"
 
 namespace detail_ {
 template <class T, class U>

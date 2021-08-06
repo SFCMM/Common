@@ -1,10 +1,11 @@
 #include <array>
 #include <cstddef>
+#include <sfcmm_common.h>
 #include <vector>
-#include "common/types.h"
+//#include "common/types.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include "util/string_helper.h"
+//#include "coutil/string_helper.h"
 
 TEST(strStreamify, HandlesZeroInput) {
   using namespace std;
