@@ -2,8 +2,8 @@
 Common functionality for simulation tools as a header-only library C++17+.
 
 # Note:
-- This porject is mainly intentended to keep track of external libraries
-- And keep very general code out of all the other projects
+- This project is mainly intentended to keep track of external libraries
+- Keep very general code out of all the other projects
 
 ## Dependencies
 * Eigen 3.3.9 https://gitlab.com/libeigen/eigen
