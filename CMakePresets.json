@@ -10,6 +10,7 @@
       "name": "default-gnu",
       "displayName": "Default Config GNU",
       "generator": "Ninja",
+      "hidden": true,
       "cacheVariables": {
         "CMAKE_C_COMPILER": "gcc-10",
         "CMAKE_CXX_COMPILER": "g++-10"
@@ -22,6 +23,7 @@
       "name": "default-clang",
       "displayName": "Default Config CLang",
       "generator": "Ninja",
+      "hidden": true,
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang-10",
         "CMAKE_CXX_COMPILER": "clang++-10"

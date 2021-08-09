@@ -36,3 +36,7 @@ build/
 CMakeFiles/
 
 .idea/
+
+build2/
+
+cmake-build-coverage-coverage/
