@@ -35,28 +35,28 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       # ubuntu-latest is on cmake 3.16...
       #run: cmake -B ${{github.workspace}}/build --preset release-gnu
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_C_COMPILER="gcc-10" -DCMAKE_CXX_COMPILER="g++-10" 
+      run: cmake --preset=coverage
 
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build --preset coverage
+      run: cmake --build
       
     - name: test
-      working-directory: ${{github.workspace}}/build/UnitTest/
+      working-directory: ${{github.workspace}}/build/coverage/UnitTest/
       run: ./UnitTest --gtest_output="xml:report.xml"
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
-       files:  ${{github.workspace}}/build/UnitTest/*.xml
+       files:  ${{github.workspace}}/build/coverage/UnitTest/*.xml
        
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        directory: ${{github.workspace}}/build/UnitTest/
+        directory: ${{github.workspace}}/build/coverage/UnitTest/
 
 
    # - name: Test
