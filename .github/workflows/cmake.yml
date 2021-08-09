@@ -40,7 +40,7 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/build -DCMAKE_C_FLAGS="--coverage" -DCMAKE_CXX_FLAGS="--coverage"
+      run: cmake --build ${{github.workspace}}/build --preset coverage
       
     - name: test
       working-directory: ${{github.workspace}}/build/UnitTest/
