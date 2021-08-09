@@ -35,7 +35,7 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       # ubuntu-latest is on cmake 3.16...
       #run: cmake -B ${{github.workspace}}/build --preset release-gnu
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_C_COMPILER="gcc-10" -DCMAKE_CXX_COMPILER="g++-10"
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_C_COMPILER="gcc-10" -DCMAKE_CXX_COMPILER="g++-10" -DCMAKE_C_FLAGS="--coverage"
 
 
     - name: Build
@@ -51,6 +51,13 @@ jobs:
       if: always()
       with:
        files:  ${{github.workspace}}/build/UnitTest/*.xml
+       
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        directory: ${{github.workspace}}/build/UnitTest/
+
 
    # - name: Test
    #   working-directory: ${{github.workspace}}/build
