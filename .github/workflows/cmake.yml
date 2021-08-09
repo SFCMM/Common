@@ -36,7 +36,7 @@ jobs:
       run: |
            pwd
            ls -larth
-           cmake --preset=coverage
+           cmake --preset=coverage .
 
 
 
