@@ -35,7 +35,8 @@ jobs:
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
       # ubuntu-latest is on cmake 3.16...
       #run: cmake -B ${{github.workspace}}/build --preset release-gnu
-      run: cmake --preset=coverage
+      run: |
+           cmake --preset=coverage
            cmake --version
            ls -larth
 
