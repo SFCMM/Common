@@ -36,9 +36,10 @@ jobs:
       # ubuntu-latest is on cmake 3.16...
       #run: cmake -B ${{github.workspace}}/build --preset release-gnu
       run: |
-           cmake --preset=coverage
            cmake --version
            ls -larth
+           cmake --preset=coverage
+
 
 
     - name: Build
