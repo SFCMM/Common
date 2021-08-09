@@ -43,14 +43,14 @@ jobs:
       run: cmake --build ${{github.workspace}}/build
       
     - name: test
-      working-directory: ${{github.workspace}}/build
+      working-directory: ${{github.workspace}}/build/UnitTest/
       run: ./UnitTest --gtest_output="xml:report.xml"
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
-       files:  ${{github.workspace}}/build/*.xml
+       files:  ${{github.workspace}}/build/UnitTest/*.xml
 
    # - name: Test
    #   working-directory: ${{github.workspace}}/build
