@@ -39,7 +39,7 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build .
+      run: cmake --build --preset=coverage
       
     - name: test
       working-directory: ${{github.workspace}}/build/coverage/UnitTest/
