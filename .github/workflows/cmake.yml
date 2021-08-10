@@ -45,6 +45,7 @@ jobs:
       working-directory: ${{github.workspace}}/build/coverage/UnitTest/
       run: | 
            ./UnitTest --gtest_output="xml:report.xml"
+           cd ..
            pwd
            ls -larth
       
