@@ -90,6 +90,8 @@ jobs:
         name: 'bench-gnu'
         tool: 'googlecpp'
         output-file-path: ${{github.workspace}}/build/release-gnu/perf/bench_gnu.json
+        fail-on-alert: true
+
         
     - name: Store benchmark result CLANG
       uses: rhysd/github-action-benchmark@v1
