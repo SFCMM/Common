@@ -83,6 +83,20 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         directory: ${{github.workspace}}
+        
+    - name: Store benchmark result GNU
+      uses: rhysd/github-action-benchmark@v1
+      with:
+        name: 'bench-gnu'
+        tool: 'googlecpp'
+        output-file-path: ${{github.workspace}}/build/release-gnu/perf/bench_gnu.json
+        
+    - name: Store benchmark result CLANG
+      uses: rhysd/github-action-benchmark@v1
+      with:
+        name: 'bench-clang'
+        tool: 'googlecpp'
+        output-file-path: ${{github.workspace}}/build/release-clang/perf/bench_clang.json       
 
 
    # - name: Test
