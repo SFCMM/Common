@@ -65,7 +65,7 @@ jobs:
            ls
            
     - name: performance
-      working-directory: ${{github.workspace}}/build/coverage/perf/
+      working-directory: ${{github.workspace}}/build/release-gnu/perf/
       run: | 
            ls -larth
            ./PerformanceTesting
