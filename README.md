@@ -1,5 +1,5 @@
 # Common [WIP]
-[![Build Status](https://github.com/github/SFCMM/Common/cmake.yml/badge.svg)
+[![Build Status](https://github.com/github/SFCMM/Common/actions/workflows/cmake.yml/badge.svg)
 [![Action Marketplace][release-badge]][marketplace]
 [![codecov][codecov-badge]][codecov]
 
