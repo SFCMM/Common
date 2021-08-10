@@ -35,7 +35,7 @@ jobs:
         
     - name: install-preq
       run: |
-           sudo apt install mpi-default-dev ninja-build
+           sudo apt install mpi-default-dev ninja-build libomp-dev
            pip install gcovr
 
 
