@@ -85,6 +85,7 @@ jobs:
         directory: ${{github.workspace}}
         
     - name: Store benchmark result GNU
+      if: github.event_name != 'pull_request'
       uses: rhysd/github-action-benchmark@v1
       with:
         name: 'bench-gnu'
@@ -93,16 +94,22 @@ jobs:
         fail-on-alert: true
         auto-push: true
         github-token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+        comment-always: true
 
         
 
         
-    #- name: Store benchmark result CLANG
-    #  uses: rhysd/github-action-benchmark@v1
-    #  with:
-    #    name: 'bench-clang'
-    #    tool: 'googlecpp'
-    #    output-file-path: ${{github.workspace}}/build/release-clang/perf/bench_clang.json       
+    - name: Store benchmark result CLANG
+      if: github.event_name != 'pull_request'
+      uses: rhysd/github-action-benchmark@v1
+      with:
+       name: 'bench-clang'
+       tool: 'googlecpp'
+       output-file-path: ${{github.workspace}}/build/release-clang/perf/bench_clang.json      
+       fail-on-alert: true
+       auto-push: true
+       github-token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+       comment-always: true
 
 
    # - name: Test
