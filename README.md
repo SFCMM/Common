@@ -1,4 +1,10 @@
 # Common [WIP]
+=======================================================================================
+
+[![Build Status][build-badge]][ci]
+[![Action Marketplace][release-badge]][marketplace]
+[![codecov][codecov-badge]][codecov]
+
 Common functionality for simulation tools as a header-only library C++17+.
 
 # Note:
