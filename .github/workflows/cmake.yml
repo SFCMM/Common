@@ -64,12 +64,13 @@ jobs:
            cd ${{github.workspace}}
            ls
            
-    - name: performance
+    - name: performance-gnu
       working-directory: ${{github.workspace}}/build/release-gnu/perf/
-      run: | 
-           ls -larth
-           ./PerformanceTesting
-           ls -larth
+      run: ./PerformanceTesting
+      
+    - name: performance-clang
+      working-directory: ${{github.workspace}}/build/release-clang/perf/
+      run: ./PerformanceTesting
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
