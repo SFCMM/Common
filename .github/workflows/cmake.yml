@@ -91,6 +91,8 @@ jobs:
         tool: 'googlecpp'
         output-file-path: ${{github.workspace}}/build/release-gnu/perf/bench_gnu.json
         fail-on-alert: true
+        auto-push: true
+        
 
         
     #- name: Store benchmark result CLANG
