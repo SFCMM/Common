@@ -1,6 +1,7 @@
 # Common [WIP]
+[![GitHub license](https://img.shields.io/github/license/SFCMM/Common)](https://github.com/SFCMM/Common/blob/main/LICENSE)
 ![Build Status](https://github.com/SFCMM/Common/actions/workflows/cmake.yml/badge.svg)
-[![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/SFCMM/Common/releases/)
+[![GitHub release](https://img.shields.io/github/release/SFCMM/Common)](https://github.com/SFCMM/Common/releases/)
 [![codecov](https://codecov.io/gh/SFCMM/Common/branch/main/graph/badge.svg?token=YWFY0RE7G5)](https://codecov.io/gh/SFCMM/Common)
 
 Common functionality for simulation tools as a header-only library C++17+.
