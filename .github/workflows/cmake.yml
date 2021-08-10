@@ -43,7 +43,10 @@ jobs:
       
     - name: test
       working-directory: ${{github.workspace}}/build/coverage/UnitTest/
-      run: ./UnitTest --gtest_output="xml:report.xml"
+      run: | 
+           ./UnitTest --gtest_output="xml:report.xml"
+           pwd
+           ls -larth
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
