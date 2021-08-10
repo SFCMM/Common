@@ -36,13 +36,19 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake --preset=coverage .
+      run: |
+            cmake --preset=coverage .
+            cmake --preset=release-gnu .
+            cmake --preset=release-clang .
 
 
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build --preset=coverage --target UnitTest
+      run: |
+            cmake --build --preset=coverage --target UnitTest -j 2
+            cmake --build --preset=release-gnu --target PerformanceTesting -j 2
+            cmake --build --preset=release-clang --target PerformanceTesting -j 2
       
     - name: test
       working-directory: ${{github.workspace}}/build/coverage/UnitTest/
