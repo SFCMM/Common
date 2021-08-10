@@ -92,6 +92,8 @@ jobs:
         output-file-path: ${{github.workspace}}/build/release-gnu/perf/bench_gnu.json
         fail-on-alert: true
         auto-push: true
+        github-token: ${{ secrets.PERSONAL_GITHUB_TOKEN }}
+
         
 
         
