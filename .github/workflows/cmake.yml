@@ -67,7 +67,8 @@ jobs:
     - name: performance
       working-directory: ${{github.workspace}}/build/coverage/perf/
       run: | 
-           ./PerformanceTesting"
+           ls -larth
+           ./PerformanceTesting
            ls -larth
       
     - name: Publish Unit Test Results
