@@ -66,11 +66,11 @@ jobs:
            
     - name: performance-gnu
       working-directory: ${{github.workspace}}/build/release-gnu/perf/
-      run: ./PerformanceTesting
+      run: ./PerformanceTesting --benchmark_out=bench_gnu.json --benchmark_out_format=json
       
     - name: performance-clang
       working-directory: ${{github.workspace}}/build/release-clang/perf/
-      run: ./PerformanceTesting
+      run: ./PerformanceTesting --benchmark_out=bench_clang.json --benchmark_out_format=json
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
