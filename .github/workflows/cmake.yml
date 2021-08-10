@@ -48,7 +48,7 @@ jobs:
       working-directory: ${{github.workspace}}/build/coverage/UnitTest/
       run: | 
            ./UnitTest --gtest_output="xml:report.xml"
-           gcovr -r ${{github.workspace}} --filter ${{github.workspace}}/include/
+           gcovr -r ${{github.workspace}} --filter ${{github.workspace}}/include/ --xml cover.xml --fail-under-line 90 
       
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
