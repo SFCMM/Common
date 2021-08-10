@@ -1,6 +1,4 @@
 # Common [WIP]
-=======================================================================================
-
 [![Build Status][build-badge]][ci]
 [![Action Marketplace][release-badge]][marketplace]
 [![codecov][codecov-badge]][codecov]
