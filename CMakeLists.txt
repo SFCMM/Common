@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(common)
-project(common VERSION "1")
+project(common VERSION "2")
 
 add_subdirectory(UnitTest)
 add_subdirectory(perf)
