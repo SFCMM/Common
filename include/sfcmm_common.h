@@ -2,8 +2,9 @@
 
 #ifndef sfcmm_common_H
 #define sfcmm_common_H
-
+namespace sfcmm {
 static constexpr int MAX_DIM = 4;
+}
 
 #include "common/compiler_config.h"
 #include "common/globalmpi.h"
