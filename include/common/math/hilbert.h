@@ -1,5 +1,7 @@
-#ifndef HILBERT_H
-#define HILBERT_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_HILBERT_H
+#define SFCMM_HILBERT_H
 #include <bitset>
 #include <gcem.hpp>
 #include "common/sfcmm_types.h"
@@ -44,4 +46,4 @@ inline auto index(const VectorD<NDIM>& x, const GInt hilbertLevel) -> GInt {
   return index;
 }
 } // namespace hilbert
-#endif // HILBERT_H
+#endif // SFCMM_HILBERT_H

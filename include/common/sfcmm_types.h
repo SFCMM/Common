@@ -1,5 +1,7 @@
-#ifndef GRIDGENERATOR_TYPES_H
-#define GRIDGENERATOR_TYPES_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_TYPES_H
+#define SFCMM_TYPES_H
 #include <cstdint>
 #include <string>
 #include "compiler_config.h"
@@ -47,4 +49,4 @@ class NullBuffer : public std::streambuf {
 
 inline NullBuffer nullBuffer; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-#endif // GRIDGENERATOR_TYPES_H
+#endif // sfcmm_TYPES_H

@@ -1,5 +1,7 @@
-#ifndef GRIDGENERATOR_BACKTRACE_H
-#define GRIDGENERATOR_BACKTRACE_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_BACKTRACE_H
+#define SFCMM_BACKTRACE_H
 
 #include <cmath>
 #include <iostream>
@@ -56,4 +58,4 @@ inline void backtrace() {
 } // namespace debug
 
 
-#endif // GRIDGENERATOR_BACKTRACE_H
+#endif // SFCMM_BACKTRACE_H

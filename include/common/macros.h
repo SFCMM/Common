@@ -1,5 +1,7 @@
-#ifndef GRIDGENERATOR_MACROS_H
-#define GRIDGENERATOR_MACROS_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_MACROS_H
+#define SFCMM_MACROS_H
 
 #ifdef CLANG_COMPILER
 #pragma clang diagnostic push
@@ -42,4 +44,4 @@
 #ifdef CLANG_COMPILER
 #pragma clang diagnostic pop
 #endif
-#endif // GRIDGENERATOR_MACROS_H
+#endif // SFCMM_MACROS_H

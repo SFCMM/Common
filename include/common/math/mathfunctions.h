@@ -1,5 +1,7 @@
-#ifndef MATHFUNCTIONS_H
-#define MATHFUNCTIONS_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_MATHFUNCTIONS_H
+#define SFCMM_MATHFUNCTIONS_H
 #include <cmath>
 #include <gcem.hpp>
 #include "common/sfcmm_types.h"
@@ -50,4 +52,4 @@ template <class T>
   return num % 2 == 0;
 }
 
-#endif // MATHFUNCTIONS_H
+#endif // SFCMM_MATHFUNCTIONS_H

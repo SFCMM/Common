@@ -1,5 +1,7 @@
-#ifndef GRIDGENERATOR_CARTESIAN_H
-#define GRIDGENERATOR_CARTESIAN_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_CARTESIAN_H
+#define SFCMM_CARTESIAN_H
 
 #include <gcem.hpp>
 
@@ -119,4 +121,4 @@ static constexpr std::array<std::array<GDouble, cartesian::maxNoNghbrs<sfcmm::MA
         {{-1, 14, -1, 13, -1, 11, -1, 7}}  // 15
     }};
 } // namespace cartesian
-#endif // GRIDGENERATOR_CARTESIAN_H
+#endif // SFCMM_CARTESIAN_H

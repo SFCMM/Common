@@ -1,5 +1,7 @@
-#ifndef GRIDGENERATOR_SYS_H
-#define GRIDGENERATOR_SYS_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_SYS_H
+#define SFCMM_SYS_H
 
 #include <array>
 #include <date.h>
@@ -49,4 +51,4 @@ inline auto getCWD() -> GString { return std::filesystem::current_path(); }
 /// \param name File name to check for existence.
 /// \return File exists?
 inline auto isFile(const std::string& name) -> GBool { return std::filesystem::exists(name); }
-#endif // GRIDGENERATOR_SYS_H
+#endif // SFCMM_SYS_H

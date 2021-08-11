@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
-#ifndef sfcmm_common_H
-#define sfcmm_common_H
+#ifndef SFCMM_COMMON_H
+#define SFCMM_COMMON_H
 namespace sfcmm {
 static constexpr int MAX_DIM = 4;
 }
@@ -20,4 +20,4 @@ static constexpr int MAX_DIM = 4;
 #include "common/math/hilbert.h"
 #include "common/math/mathfunctions.h"
 
-#endif
+#endif //SFCMM_COMMON_H

@@ -1,5 +1,7 @@
-#ifndef GRIDGENERATOR_LOG_H
-#define GRIDGENERATOR_LOG_H
+// SPDX-License-Identifier: BSD-3-Clause
+
+#ifndef SFCMM_LOG_H
+#define SFCMM_LOG_H
 #include <fstream>
 #include <memory>
 #include <mpi.h>
@@ -503,4 +505,4 @@ class LogFile : public Log {
 inline LogFile logger; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 
-#endif // GRIDGENERATOR_LOG_H
+#endif // SFCMM_LOG_H
