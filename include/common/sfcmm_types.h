@@ -42,6 +42,9 @@ using VectorD = Eigen::Matrix<GDouble, NDIM, 1>;
 template <GInt NDIM>
 using VectorI = Eigen::Matrix<GInt, NDIM, 1>;
 
+static constexpr GFloat  GFloatEps      = std::numeric_limits<GFloat>::epsilon();
+static constexpr GDouble GDoubleEps     = std::numeric_limits<GDouble>::epsilon();
+
 class NullBuffer : public std::streambuf {
  public:
   auto overflow(int c) -> int override { return c; }
@@ -49,4 +52,4 @@ class NullBuffer : public std::streambuf {
 
 inline NullBuffer nullBuffer; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-#endif // sfcmm_TYPES_H
+#endif // GRIDGENERATOR_TYPES_H

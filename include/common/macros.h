@@ -25,6 +25,8 @@
 
 #define AT_ std::string(FUN_) + " (" + LOC_ + ")"
 
+#define __FUNCTION_LOCATION__ std::string(__FILE__) + ": " + std::string(__FUNCTION__)
+
 #ifdef USE_ASSERTS
 #define ASSERT(condition, message)                                                                                                         \
   do {                                                                                                                                     \
@@ -44,4 +46,4 @@
 #ifdef CLANG_COMPILER
 #pragma clang diagnostic pop
 #endif
-#endif // SFCMM_MACROS_H
+#endif // GRIDGENERATOR_MACROS_H
