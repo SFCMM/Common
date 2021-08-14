@@ -52,4 +52,4 @@ class NullBuffer : public std::streambuf {
 
 inline NullBuffer nullBuffer; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
-#endif // GRIDGENERATOR_TYPES_H
+#endif // SFCMM_TYPES_H

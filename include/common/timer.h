@@ -15,6 +15,9 @@
 #include <utility>
 #include <vector>
 
+//todo: documentation
+//todo: tests
+
 using chronoTimePoint = std::chrono::time_point<std::chrono::system_clock, std::chrono::duration<double>>;
 
 class Timer {

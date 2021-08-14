@@ -46,4 +46,4 @@
 #ifdef CLANG_COMPILER
 #pragma clang diagnostic pop
 #endif
-#endif // GRIDGENERATOR_MACROS_H
+#endif // SFCMM_MACROS_H
