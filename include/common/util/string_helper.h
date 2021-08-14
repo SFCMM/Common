@@ -88,4 +88,4 @@ inline auto toStringVector<std::byte>(const std::vector<std::byte>& in, GInt siz
   return string_vector;
 }
 
-#endif // GRIDGENERATOR_STRING_HELPER_H
+#endif // SFCMM_STRING_HELPER_H

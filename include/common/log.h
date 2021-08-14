@@ -3,14 +3,14 @@
 #ifndef SFCMM_LOG_H
 #define SFCMM_LOG_H
 #include <fstream>
+#include <map>
 #include <memory>
 #include <mpi.h>
 #include <sstream>
 #include <utility>
 #include <vector>
-#include <map>
-#include "util/sys.h"
 #include "macros.h"
+#include "util/sys.h"
 
 
 // todo: add tests
@@ -158,14 +158,31 @@ class Log_buffer : public std::stringbuf {
     return tmpBuffer.str();
   }
 
+  /// Flush the current buffer to output target
   virtual void flushBuffer() = 0;
 
+  /// Current domain Id
+  /// \return domain Id
   [[nodiscard]] auto inline domainId() const -> int { return m_domainId; }
+
+  /// Current domain Id (reference version)
+  /// \return reference to domain Id
   auto inline domainId() -> int& { return m_domainId; }
+
+  /// Current number of MPI ranks
+  /// \return number of MPI ranks
   [[nodiscard]] auto inline noDomains() const -> int { return m_noDomains; }
+
+  /// Current number of MPI ranks (reference version)
+  /// \return reference to the number of MPI ranks
   auto inline noDomains() -> int& { return m_noDomains; }
 
+  /// Prefix message of the XML output of the log message
+  /// \return Prefix message of the XML output
   [[nodiscard]] auto inline prefixMessage() const -> const GString& { return m_prefixMessage; }
+
+  /// Suffix message of the XML output of the log message
+  /// \return Suffix message of the XML output
   [[nodiscard]] auto inline suffixMessage() const -> const GString& { return m_suffixMessage; }
   [[nodiscard]] auto inline minFlushSize() const -> GInt { return m_minFlushSize; }
 
@@ -177,10 +194,10 @@ class Log_buffer : public std::stringbuf {
   GInt    m_minFlushSize{0}; //!< Minimum length of the internal buffer before flushing
   GString m_prefixMessage;   //!< Stores the prefix that is prepended to each output
   GString m_suffixMessage;   //!< Stores the suffix that is appended to each output
-  GInt    m_argc{};
-  GChar** m_argv{};
+  GInt    m_argc{};          /// Command line argument count
+  GChar** m_argv{};          /// Command line arguments
 
-  std::map<GString, std::function<GString()>> m_prefixAttributes;
+  std::map<GString, std::function<GString()>> m_prefixAttributes; /// attributes of the XML log message
 };
 
 
@@ -409,7 +426,12 @@ class Log : public std::ostream {
    */
   void updateAttributes() { m_buffer->createPrefixMessage(); }
 
+  /// Get access to the buffer of the Log using an unique ptr to log_buffer instance.
+  /// \return Unique ptr to the log_buffer instance.
   inline auto buffer() -> std::unique_ptr<Log_buffer>& { return m_buffer; }
+
+  /// Get access to the buffer of the Log using an *const* unique ptr to log_buffer instance.
+  /// \return *Const* Unique ptr to the log_buffer instance.
   inline auto buffer() const -> const std::unique_ptr<Log_buffer>& { return m_buffer; }
 
  private:
@@ -436,7 +458,7 @@ class LogFile : public Log {
    * \param[in] filename Name of the file to open.
    * \param[in] mpiComm MPI communicator for which to open the file.
    */
-  LogFile(const GString& filename, MPI_Comm mpiComm = MPI_COMM_WORLD, GBool rootOnlyHardwired = false) {
+  explicit LogFile(const GString& filename, MPI_Comm mpiComm = MPI_COMM_WORLD, GBool rootOnlyHardwired = false) {
     open(filename, rootOnlyHardwired, 0, nullptr, mpiComm);
   }
   ~LogFile() override { close(); };
