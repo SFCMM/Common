@@ -12,13 +12,6 @@ namespace cartesian {
 /// \return The opposite direction to dir.
 static constexpr inline auto oppositeDir(const GInt dir) -> GInt {
   return 2 * (dir / 2) + 1 - (dir % 2);
-  // 0 = 1 ok
-  // 1 = 0 ok
-  // 2 = 3 ok
-  //...
-  // 5 = 4 ok
-  // 6 = 7 ok
-  // 7 = 6 ok
 }
 /// Return maximum number of children per cell
 /// \tparam NDIM Number of dimension of the Cartesian grid
