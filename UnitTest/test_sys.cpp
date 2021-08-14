@@ -6,4 +6,5 @@ TEST(Sys, HandlesZeroInput) {
   ASSERT_TRUE(!hostString().empty());
   ASSERT_TRUE(!userString().empty());
   ASSERT_TRUE(!getCWD().empty());
+  ASSERT_TRUE(isFile("/etc/fstab"));
 }
