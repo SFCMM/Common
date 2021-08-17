@@ -51,4 +51,9 @@ inline auto getCWD() -> GString { return std::filesystem::current_path(); }
 /// \param name File name to check for existence.
 /// \return File exists?
 inline auto isFile(const std::string& name) -> GBool { return std::filesystem::exists(name); }
+
+/// Get size of a file in bytes.
+/// \param name File name of the file to be sized.
+/// \return Number of bytes contained in the file.
+inline auto fileSize(const std::string& name) -> GInt { return static_cast<GInt>(std::filesystem::file_size(name)); }
 #endif // SFCMM_SYS_H
