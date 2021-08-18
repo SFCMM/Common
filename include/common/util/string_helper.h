@@ -112,4 +112,33 @@ static inline auto rtrim(std::string_view s) -> std::string_view {
 /// \return Trimmed string
 static inline auto trim(std::string_view s) -> std::string_view { return ltrim(rtrim(s)); }
 
+/// Split a string by the given delimiter.
+/// \tparam ContainerT Container type for the tokens produced by splitting the string by the delimiter
+/// \param str String to be split.
+/// \param tokens Container containing the string split into tokens.
+/// \param delimiters Delimiter used for the splitting operation.
+/// \param trimEmpty Should empty tokens be trimmed?
+template <class ContainerT>
+inline void tokenize(const std::string& str, ContainerT& tokens, const std::string& delimiters = " ", GBool trimEmpty = false) {
+  std::string::size_type pos     = 0;
+  std::string::size_type lastPos = 0;
+  std::string::size_type length  = str.length();
+
+  using value_type = typename ContainerT::value_type;
+  using size_type  = typename ContainerT::size_type;
+
+  while(lastPos < length + 1) {
+    pos = str.find_first_of(delimiters, lastPos);
+    if(pos == std::string::npos) {
+      pos = length;
+    }
+
+    if(pos != lastPos || !trimEmpty) {
+      tokens.push_back(value_type(str.data() + lastPos, static_cast<size_type>(pos) - lastPos));
+    }
+
+    lastPos = pos + 1;
+  }
+}
+
 #endif // SFCMM_STRING_HELPER_H
