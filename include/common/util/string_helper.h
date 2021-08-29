@@ -14,6 +14,21 @@
 /// \tparam T Type of the vector
 /// \param in Vector to be stringstreamed
 /// \return std::stringstream of the in vector.
+template <class T>
+static inline auto strStreamify(const std::vector<T>& in) -> std::stringstream {
+  std::stringstream str;
+  str << in[0];
+  for(GInt i = 1; i < in.size(); i++) {
+    str << " " << in[i];
+  }
+  return str;
+}
+
+/// Get a stringstream from a given std::vector. Type needs to overload "<<".
+/// \tparam LENGTH Length of the vector to be streamed.
+/// \tparam T Type of the vector
+/// \param in Vector to be stringstreamed
+/// \return std::stringstream of the in vector.
 template <GInt LENGTH, class T>
 static inline auto strStreamify(const std::vector<T>& in) -> std::stringstream {
   std::stringstream str;
@@ -54,11 +69,11 @@ static inline auto strStreamify(const VectorD<LENGTH>& in) -> std::stringstream 
   return str;
 }
 
-/// Convert an input vector to a string vector of the same size or as per the
-/// given optional argument size. \tparam T Type of the vector. \param in Input
-/// vector to be stringified. \param size (Default=same as input vector) Provide
-/// the size if you want partial stringification. \return Vector of strings of
-/// the input vector.
+/// Convert an input vector to a string vector of the same size or as per the given optional argument size.
+/// \tparam T Type of the vector.
+/// \param in Input vector to be stringified.
+/// \param size (Default=same as input vector) Provide the size if you want partial stringification.
+/// \return Vector of strings of the input vector.
 template <typename T>
 static inline auto toStringVector(const std::vector<T>& in, GInt size = -1) -> std::vector<GString> {
   std::vector<GString> string_vector;
@@ -71,11 +86,10 @@ static inline auto toStringVector(const std::vector<T>& in, GInt size = -1) -> s
   return string_vector;
 }
 
-/// Convert an input byte vector to a string vector of the same size or as per
-/// the given optional argument size. <std::byte version> \param in Input byte
-/// vector to be stringified. \param size (Default=same as input vector) Provide
-/// the size if you want partial stringification. \return Vector of strings of
-/// the input byte vector.
+/// Convert an input byte vector to a string vector of the same size or as per the given optional argument size. <std::byte version>
+/// \param in Input byte vector to be stringified.
+/// \param size (Default=same as input vector) Provide the size if you want partial stringification.
+/// \return Vector of strings of the input byte vector.
 template <>
 inline auto toStringVector<std::byte>(const std::vector<std::byte>& in, GInt size) -> std::vector<GString> {
   std::vector<GString> string_vector;
