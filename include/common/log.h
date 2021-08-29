@@ -123,8 +123,10 @@ class Log_buffer : public std::stringbuf {
     ostringstream tmpBuffer;
 
     // Write XML header information to buffer
-    tmpBuffer << R"(<?xml version="1.0" standalone="yes" ?>\n)";
-    tmpBuffer << R"(<root>\n)";
+    tmpBuffer << R"(<?xml version="1.0" standalone="yes" ?>)"
+              << "\n";
+    tmpBuffer << R"(<root>)"
+              << "\n";
     tmpBuffer << R"(<meta name="noDomains" content=")" << m_noDomains << "\" />\n";
     tmpBuffer << R"(<meta name="dateCreation" content=")" << dateString() << "\" />\n";
     tmpBuffer << R"(<meta name="fileFormatVersion" content=")" << m_fileFormatVersion << "\" />\n";
