@@ -12,6 +12,16 @@ static constexpr GInt    BASE2          = 2;
 static constexpr GDouble HALF           = 0.5;
 static constexpr GInt    INVALID_CELLID = -1;
 
+/// Generate invalid list for init of arrays
+/// \tparam LENGTH Length of the invalid list
+/// \return Invalid list of LENGTH
+template <GInt LENGTH>
+static constexpr auto INVALID_LIST() -> std::array<GInt, LENGTH> {
+  std::array<GInt, LENGTH> invalid{};
+  std::fill_n(invalid.begin(), LENGTH, INVALID_CELLID);
+  return invalid;
+}
+
 // Memory
 static constexpr GInt    KBIT  = 1024;
 static constexpr GDouble DKBIT = static_cast<GDouble>(KBIT);
