@@ -34,16 +34,20 @@ using GChar   = char;
 using GUchar  = unsigned char;
 using GBool   = bool;
 
-using GInt  = int64_t;
-using GUint = uint64_t;
+using GShort  = int16_t;
+using GUshort = uint16_t;
+using GInt32  = int32_t;
+using GUint32 = uint32_t;
+using GInt    = int64_t;
+using GUint   = uint64_t;
 
 template <GInt NDIM>
 using VectorD = Eigen::Matrix<GDouble, NDIM, 1>;
 template <GInt NDIM>
 using VectorI = Eigen::Matrix<GInt, NDIM, 1>;
 
-static constexpr GFloat  GFloatEps      = std::numeric_limits<GFloat>::epsilon();
-static constexpr GDouble GDoubleEps     = std::numeric_limits<GDouble>::epsilon();
+static constexpr GFloat  GFloatEps  = std::numeric_limits<GFloat>::epsilon();
+static constexpr GDouble GDoubleEps = std::numeric_limits<GDouble>::epsilon();
 
 class NullBuffer : public std::streambuf {
  public:
