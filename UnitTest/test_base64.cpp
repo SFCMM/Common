@@ -42,7 +42,7 @@ TEST(Base64, HandlesZeroInput) {
   ASSERT_EQ(base64::encode(binary::getSwappedEndian(static_cast<GInt>(384))), "IABAAAAAAAA"); // this is incorrect!
   //g      A      E      A  (Note: little endian is filled with 0 from right!!!!)
   //100000 000000 000100 0000000000000000000000000000000000000000000000
-  //  ASSERT_EQ(base64::encodeLE(static_cast<GInt>(384)), "gAEAAAAAAAA");
+  ASSERT_EQ(base64::encodeLE(static_cast<GInt>(384)), "gAEAAAAAAAA");
 
   // float
   // A     /      g      A      A      A
@@ -54,6 +54,9 @@ TEST(Base64, HandlesZeroInput) {
   //A      W      +      /      +      9
   //000000 010110 111110 111111 111110 111101
   ASSERT_EQ(base64::encode(binary::getSwappedEndian(static_cast<GFloat>(-0.12499062716960907))), "AW+/+9");//this is incorrect
+  //F      v      v      /      v      Q
+  //000101 101111 101111 111111 101111 010000
+  ASSERT_EQ(base64::encodeLE(static_cast<GFloat>(-0.12499062716960907)), "Fvv/vQ");
 
   // double
   ASSERT_EQ(base64::encode(static_cast<GDouble>(1)), "D/wAAAAAAAA");

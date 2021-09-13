@@ -19,8 +19,21 @@ static constexpr GInt mask_fourBit = 0x0F;
 static constexpr GInt mask_fiveBit = 0x1F;
 // 111111
 static constexpr GInt mask_sixBit = 0x3F;
+// 100000
+static constexpr GInt mask_firstBitLE = 0x20;
+// 110000
+static constexpr GInt mask_twoBitLE = 0x30;
+// 111000
+static constexpr GInt mask_threeBitLE = 0x38;
+// 111100
+static constexpr GInt mask_fourBitLE = 0x3C;
+// 111110
+static constexpr GInt mask_fiveBitLE = 0x3E;
+
 
 static constexpr std::array<GInt, 7> masks = {0, mask_firstBit, mask_twoBit, mask_threeBit, mask_fourBit, mask_fiveBit, mask_sixBit};
+static constexpr std::array<GInt, 7> masksLE = {0, mask_firstBitLE, mask_twoBitLE, mask_threeBitLE, mask_fourBitLE, mask_fiveBitLE,
+                                                mask_sixBit};
 
 constexpr inline static unsigned char encodeChar(const unsigned char c) { return encodeTable[c]; }
 
@@ -39,6 +52,22 @@ inline static auto encode(const T c) -> GString {
   for(int i = 1; i < num_chars; ++i) {
     tmp[i] = encodeTable[(tmp_int >> (shift - i * 6)) & masks[6]];
   }
+  return {std::begin(tmp), std::end(tmp)};
+}
+
+template <typename T>
+inline static auto encodeLE(const T c) -> GString {
+  static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 / 6.0);
+  static constexpr GInt shift      = sizeof(T) * 8 - 6;
+  static constexpr GInt end_shift = num_chars * 6 - sizeof(T) * 8;
+
+  std::array<GUchar, num_chars> tmp{};
+  T                             tmp_val = binary::getSwappedEndian(c);
+  uint64_t                      tmp_int = *(static_cast<uint64_t*>(static_cast<void*>(&tmp_val)));
+  for(int i = 0; i < num_chars - 1; ++i) {
+    tmp[i] = encodeTable[(tmp_int >> (shift - i * 6)) & masksLE[6]];
+  }
+  tmp[num_chars-1] = encodeTable[(tmp_int << end_shift) & masksLE[6-end_shift]];
   return {std::begin(tmp), std::end(tmp)};
 }
 
