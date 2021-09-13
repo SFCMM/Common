@@ -24,6 +24,13 @@ static constexpr inline void swapEndian(T& val) {
   val = dst.val;
 }
 
+template<typename T>
+static constexpr inline auto getSwappedEndian(const T val){
+  T tmp = val;
+  swapEndian(tmp);
+  return tmp;
+}
+
 template <>
 constexpr inline void swapEndian<std::uint16_t>(std::uint16_t& value) {
   value = (value >> 8) | (value << 8);

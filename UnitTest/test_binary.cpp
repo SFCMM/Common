@@ -28,7 +28,9 @@ TEST(Binary, HandlesZeroInput) {
 
   // double
   ASSERT_EQ(binary::convert(static_cast<GDouble>(1)).to_string(), "0011111111110000000000000000000000000000000000000000000000000000");
+  ASSERT_EQ(binary::convert(static_cast<GFloat>(1)).to_string(), "00111111100000000000000000000000");
   ASSERT_EQ(binary::convert(static_cast<GFloat>(-0.12499062716960907)).to_string(), "10111101111111111111101100010110");
+  ASSERT_EQ(binary::convert(static_cast<GDouble>(-0.12499062716960907)).to_string(), "1011111110111111111111110110001011000000000000000000000000000000");
 
   // todo: this is not correct... Should this throw an error?
   ASSERT_EQ(binary::convert(static_cast<GShort>(32768)).to_string(), "1000000000000000");
@@ -38,4 +40,11 @@ TEST(Binary, HandlesZeroInput) {
   ASSERT_EQ(binary::convert(test).to_string(), "0000000100000000");
   ASSERT_EQ(binary::convertSwap(static_cast<GShort>(1)).to_string(), "0000000100000000");
   ASSERT_EQ(binary::convertSwap(static_cast<GFloat>(-0.12499062716960907)).to_string(), "00010110111110111111111110111101");
+  ASSERT_EQ(binary::convertSwap(static_cast<GDouble>(-0.12499062716960907)).to_string(), "0000000000000000000000001100000001100010111111111011111110111111");
+  ASSERT_EQ(binary::convertSwap(static_cast<GInt>(384)).to_string(), "1000000000000001000000000000000000000000000000000000000000000000");
+  GInt testA = 384;
+  binary::swapEndian(testA);
+  testA = (testA >> 58)& 0x3F;
+  ASSERT_EQ(binary::convert(testA).to_string(), "0000000000000000000000000000000000000000000000000000000000100000");
+
 }
