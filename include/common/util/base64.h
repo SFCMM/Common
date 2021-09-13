@@ -23,97 +23,20 @@ static constexpr GInt mask_sixBit = 0x3F;
 static constexpr std::array<GInt, 7> masks = {0, mask_firstBit, mask_twoBit, mask_threeBit, mask_fourBit, mask_fiveBit, mask_sixBit};
 
 constexpr inline static unsigned char encodeChar(const unsigned char c) { return encodeTable[c]; }
-constexpr inline static unsigned char encodeCharMask(const unsigned char c) { return encodeTable[c & mask_sixBit]; }
-constexpr inline static unsigned char encodeCharMS(const unsigned char c, const GInt shift, const GInt mask) {
-  return encodeTable[(c >> shift) & masks[mask]];
-}
 
-inline static auto encode(const GUchar c) -> GString {
-  // 128 64 32 16 8 4 2 1
-  // example char ex:= 1 = 0000 0001 result should be: 0000 0000 0001
-  std::array<GUchar, 2> tmp{base64_zero, base64_zero};
-  // ex >> 6 -> 0000 0000
-  tmp[0] = encodeCharMS(c, 6, 2);
-  // 0x3F = 0011 1111
-  tmp[1] = encodeCharMask(c);
-  return {std::begin(tmp), std::end(tmp)};
-}
 
-inline static auto encode(const GChar c) -> GString {
-  std::array<GUchar, 2> tmp{base64_zero, base64_zero};
-  tmp[0] = encodeCharMS(c, 6, 2);
-  tmp[1] = encodeCharMask(c);
-  return {std::begin(tmp), std::end(tmp)};
-}
+template <typename T>
+inline static auto encode(const T c) -> GString {
+  static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 / 6.0);
+  static constexpr GInt shift      = (num_chars - 1) * 6;
+  static constexpr GInt init_shift = sizeof(T) * 8 - shift;
 
-inline static auto encode(const GShort c) -> GString {
-  std::array<GUchar, 3> tmp{base64_zero, base64_zero, base64_zero};
-  tmp[0] = encodeCharMS(c, 12, 4);
-  tmp[1] = encodeCharMS(c, 6, 6);
-  tmp[2] = encodeCharMask(c);
-  return {std::begin(tmp), std::end(tmp)};
-}
 
-inline static auto encode(const GInt32 c) -> GString {
-  static constexpr GInt num_chars = 6;
-  static constexpr GInt shift     = (num_chars - 1) * 6;
-
-  std::array<GUchar, num_chars> tmp;
-  tmp.fill(base64_zero);
-    tmp[0]                      = encodeChar((c >> shift) & mask_twoBit);
-//  tmp[0] = encodeCharMS(c, shift, 2);
+  std::array<GUchar, num_chars> tmp{};
+  T                             tmp_val = c;
+  uint64_t                      tmp_int = *(static_cast<uint64_t*>(static_cast<void*>(&tmp_val)));
+  tmp[0]                                = encodeTable[(tmp_int >> shift) & masks[init_shift]];
   for(int i = 1; i < num_chars; ++i) {
-//    std::cerr << "before " << tmp[i] << std::endl;
-//    std::cerr << "before " << encodeTable[(c >> (shift - i * 6)) & masks[6]] << std::endl;
-//    tmp[i] = encodeCharMS(c, (shift - i * 6), 6);
-    tmp[i] = encodeTable[(c >> (shift - i * 6)) & masks[6]];
-//    std::cerr << tmp[i] << std::endl;
-  }
-  return {std::begin(tmp), std::end(tmp)};
-}
-
-inline static auto encode(const GFloat c) -> GString {
-  static constexpr GInt num_chars = 6;
-  static constexpr GInt shift     = (num_chars - 1) * 6;
-
-  std::array<GUchar, num_chars> tmp;
-  GFloat                        tmp_double = c;
-  uint64_t                      tmp_int    = *(static_cast<uint64_t*>(static_cast<void*>(&tmp_double)));
-//  tmp[0]                                   = encodeCharMS(tmp_int, shift, 2);
-  tmp[0] = encodeTable[(tmp_int >>shift ) & masks[2]];
-
-  for(int i = 1; i < num_chars; ++i) {
-//    tmp[i] = encodeCharMS(tmp_int, shift - i * 6, 6);
-    tmp[i] = encodeTable[(tmp_int >> (shift - i * 6)) & masks[6]];
-  }
-  return {std::begin(tmp), std::end(tmp)};
-}
-
-inline static auto encode(const GInt c) -> GString {
-  static constexpr GInt num_chars = 11;
-  static constexpr GInt shift     = (num_chars - 1) * 6;
-
-  std::array<GUchar, num_chars> tmp;
-//  tmp[0] = encodeCharMS(c, shift, 4);
-  tmp[0] = encodeTable[(c >>shift ) & masks[4]];
-  for(int i = 1; i < num_chars; ++i) {
-//    tmp[i] = encodeCharMS(c, shift - i * 6, 6);
-    tmp[i] = encodeTable[(c >> (shift - i * 6)) & masks[6]];
-  }
-  return {std::begin(tmp), std::end(tmp)};
-}
-
-inline static auto encode(const GDouble c) -> GString {
-  static constexpr GInt num_chars = 11;
-  static constexpr GInt shift     = (num_chars - 1) * 6;
-
-  std::array<GUchar, num_chars> tmp;
-  GDouble                       tmp_double = c;
-  uint64_t                      tmp_int    = *(static_cast<uint64_t*>(static_cast<void*>(&tmp_double)));
-//  tmp[0]                                   = encodeCharMS(tmp_int, shift, 4);
-  tmp[0] = encodeTable[(tmp_int >>shift ) & masks[4]];
-  for(int i = 1; i < num_chars; ++i) {
-//    tmp[i] = encodeCharMS(tmp_int, shift - i * 6, 6);
     tmp[i] = encodeTable[(tmp_int >> (shift - i * 6)) & masks[6]];
   }
   return {std::begin(tmp), std::end(tmp)};
