@@ -58,17 +58,18 @@ inline static auto encode(const T c) -> GString {
 template <typename T, GInt length>
 inline static auto encode(T* c) -> GString {
   static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 * length / 6.0);
-  static constexpr GInt shift      = (num_chars - 1) * 6;
-  static constexpr GInt init_shift = sizeof(T) * 8 - shift;
-
 
   std::array<GUchar, num_chars> encoded_base64{};
   std::bitset<num_chars * 6>    mem{};
 
+  GUchar* char_wise = static_cast<GUchar*>(static_cast<void*>(&c[0]));
+
   for(GInt i = 0; i < length; ++i) {
-    auto tmp_bitset = std::bitset<8>(c[i]);
-    for(GInt bit = 0; bit < 8; ++bit) {
-      mem[(length-i-1) * 8 + bit] = tmp_bitset[bit];
+    for(GInt byte = 0; byte < sizeof(T); ++byte) {
+      auto tmp_bitset = std::bitset<8>(char_wise[i*sizeof(T) + byte]);
+      for(GInt bit = 0; bit < 8; ++bit) {
+        mem[(length - i - 1) * sizeof(T) * 8 + byte * 8 + bit] = tmp_bitset[bit];
+      }
     }
   }
   std::cerr << mem << std::endl;

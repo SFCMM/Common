@@ -68,11 +68,26 @@ TEST(Base64, HandlesZeroInput) {
   // 000000 000001
   std::array<GChar, 1> test0 = {1};
   ASSERT_EQ((base64::encode<GChar, 1>(&test0[0])), "AB");
+  std::array<GShort, 1> test0_short = {1};
+  ASSERT_EQ((base64::encode<GShort, 1>(&test0_short[0])), "AAB");
+  std::array<GInt, 1> test0_int = {1};
+  ASSERT_EQ((base64::encode<GInt, 1>(&test0_int[0])), "AAAAAAAAAAB");
+  std::array<GDouble, 1> test0_double = {1};
+  ASSERT_EQ((base64::encode<GDouble, 1>(&test0_double[0])), "D/wAAAAAAAA");
 
   // A      Q      I      D
   // 000000 010000 001000 000011
   std::array<GChar, 3> test = {1, 2, 3};
   ASSERT_EQ((base64::encode<GChar, 3>(&test[0])), "AQID");
+  // 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0001 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+  // 0000 0000 0000 0000 0000 0010 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0011
+  // A      A      A      A      A      A      A      A      A      A      E      A      A      A      A      A      A      A
+  // 000000 000000 000000 000000 000000 000000 000000 000000 000000 000000 000100 000000 000000 000000 000000 000000 000000 000000
+  // A      A      A      g      A      A      A      A      A      A      A      A      A      D
+  // 000000 000000 000000 100000 000000 000000 000000 000000 000000 000000 000000 000000 000000 000011
+  std::array<GInt, 3> test_int = {1, 2, 3};
+  ASSERT_EQ((base64::encode<GInt, 3>(&test_int[0])), "AAAAAAAAAAEAAAAAAAAAAgAAAAAAAAAD");
+
   // A      Q      I      D
   // 000000 010000 001000 000011
 //  ASSERT_EQ(base64::encodeLE(&test[0]), "AQID");
