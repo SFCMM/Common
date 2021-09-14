@@ -62,7 +62,7 @@ inline static auto encode(T* c) -> GString {
   std::array<GUchar, num_chars> encoded_base64{};
   std::bitset<num_chars * 6>    mem{};
 
-  GUchar* char_wise = static_cast<GUchar*>(static_cast<void*>(&c[0]));
+  auto* char_wise = static_cast<GUchar*>(static_cast<void*>(&c[0]));
 
   for(GInt i = 0; i < length; ++i) {
     for(GInt byte = 0; byte < sizeof(T); ++byte) {
@@ -72,7 +72,6 @@ inline static auto encode(T* c) -> GString {
       }
     }
   }
-  std::cerr << mem << std::endl;
 
   for(GInt i = 0; i < num_chars; ++i) {
     const GInt num = mem[i * 6] + mem[i * 6 + 1] * 2 + mem[i * 6 + 2] * 4 + mem[i * 6 + 3] * 8 + mem[i * 6 + 4] * 16 + mem[i * 6 + 5] * 32;
@@ -96,6 +95,37 @@ inline static auto encodeLE(const T c) -> GString {
   }
   tmp[num_chars - 1] = encodeTable[(tmp_int << end_shift) & masksLE[6 - end_shift]];
   return {std::begin(tmp), std::end(tmp)};
+}
+
+template <typename T, GInt length>
+inline static auto encodeLE(T* c) -> GString {
+  static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 * length / 6.0);
+
+  std::array<T, length> swapped_endian{};
+  std::array<GUchar, num_chars> encoded_base64{};
+  std::bitset<num_chars * 6>    mem{};
+  for(GInt i = 0; i < length; ++i) {
+    swapped_endian[i] = binary::getSwappedEndian(c[i]);
+  }
+
+  auto* char_wise = static_cast<GUchar*>(static_cast<void*>(&swapped_endian[0]));
+
+  for(GInt i = 0; i < length; ++i) {
+    for(GInt byte = 0; byte < sizeof(T); ++byte) {
+      auto tmp_bitset = std::bitset<8>(char_wise[i*sizeof(T) + byte]);
+      for(GInt bit = 0; bit < 8; ++bit) {
+        mem[num_chars * 6 - (i+1) * sizeof(T) * 8 + byte * 8 + bit] = tmp_bitset[bit];
+      }
+    }
+  }
+  std::cerr << mem << std::endl;
+
+  for(GInt i = 0; i < num_chars; ++i) {
+    const GInt num = mem[i * 6] + mem[i * 6 + 1] * 2 + mem[i * 6 + 2] * 4 + mem[i * 6 + 3] * 8 + mem[i * 6 + 4] * 16 + mem[i * 6 + 5] * 32;
+    encoded_base64[num_chars - i - 1] = encodeTable[num];
+  }
+
+  return {std::begin(encoded_base64), std::end(encoded_base64)};
 }
 
 
