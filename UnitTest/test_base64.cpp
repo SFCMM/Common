@@ -124,4 +124,20 @@ TEST(Base64, HandlesZeroInput) {
   // A      B      A      g      M      E     =(42) =(48) =(54) =(60) =(64)
   // 000000 000001 000000 100000 001100 000100
 //  ASSERT_EQ(base64::encode<4>(&test[0]), "ABAgME=====");
+
+  GInt test_header = 384;
+  GString header = base64::encodeLE(test_header);
+  std::array<GFloat, 3> test_array = {0, -0.12499062716960907,-0.3750093877315521};
+  GString body = base64::encodeLE<GFloat,3>(&test_array[0]);
+  ASSERT_EQ(header+body, "gAEAAAAAAAAAAAAABb7/707AcC+"); //this is correct!
+  GString body_shifted = base64::encodeLE<GFloat,3, 2>(&test_array[0]);
+  ASSERT_EQ(header+body_shifted, "gAEAAAAAAAAAAAAAFvv/vTsBwL4"); //this is correct!
+
+  GInt test_header2 = 64*8;
+  GString header2 = base64::encodeLE(test_header2);
+  ASSERT_EQ(header2, "AAIAAAAAAAA");
+  std::array<GInt, 3> test_array2 = {3, 6,9};
+  GString body_shifted2 = base64::encodeLE<GInt,3, 2>(&test_array2[0]);
+  ASSERT_EQ(header2+body_shifted2, "AAIAAAAAAAADAAAAAAAAAAYAAAAAAAAACQAAAAAAAAA"); //this is correct!
+
 }

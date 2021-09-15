@@ -97,9 +97,9 @@ inline static auto encodeLE(const T c) -> GString {
   return {std::begin(tmp), std::end(tmp)};
 }
 
-template <typename T, GInt length>
+template <typename T, GInt length, GInt shifted=0>
 inline static auto encodeLE(T* c) -> GString {
-  static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 * length / 6.0);
+  static constexpr GInt num_chars  = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
 
   std::array<T, length> swapped_endian{};
   std::array<GUchar, num_chars> encoded_base64{};
@@ -114,11 +114,15 @@ inline static auto encodeLE(T* c) -> GString {
     for(GInt byte = 0; byte < sizeof(T); ++byte) {
       auto tmp_bitset = std::bitset<8>(char_wise[i*sizeof(T) + byte]);
       for(GInt bit = 0; bit < 8; ++bit) {
-        mem[num_chars * 6 - (i+1) * sizeof(T) * 8 + byte * 8 + bit] = tmp_bitset[bit];
+        const GInt index = num_chars * 6 - (i+1) * sizeof(T) * 8 + byte * 8 + bit+shifted;
+        if(shifted == 0 || index < num_chars * 6) {
+          mem[index] = tmp_bitset[bit];
+        } else if(shifted>0 && tmp_bitset[bit]) {
+          std::cerr << "WARNING: could be wrong" << std::endl; //todo: remove
+        }
       }
     }
   }
-  std::cerr << mem << std::endl;
 
   for(GInt i = 0; i < num_chars; ++i) {
     const GInt num = mem[i * 6] + mem[i * 6 + 1] * 2 + mem[i * 6 + 2] * 4 + mem[i * 6 + 3] * 8 + mem[i * 6 + 4] * 16 + mem[i * 6 + 5] * 32;
