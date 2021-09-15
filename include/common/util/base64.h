@@ -132,6 +132,7 @@ inline static auto encodeLE(T* c) -> GString {
   return {std::begin(encoded_base64), std::end(encoded_base64)};
 }
 
+//todo: merge with above
 template <typename T, GInt shifted = 0>
 inline static auto encodeLE(T *c, const GInt length) -> GString {
   const GInt num_chars = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
