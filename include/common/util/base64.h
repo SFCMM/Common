@@ -1,6 +1,12 @@
 #ifndef COMMON_BASE64_H
 #define COMMON_BASE64_H
 
+// https://www.binaryconvert.com/result_float.html?hexadecimal=16FBFFBD
+// https://cryptii.com/
+// https://www.h-schmidt.net/FloatConverter/IEEE754.html
+// https://www.scadacore.com/tools/programming-calculators/online-hex-converter/
+// https://www.rapidtables.com/convert/number/binary-to-hex.html
+
 #include "binary.h"
 namespace base64 {
 static constexpr GChar                         maxValue = 64;
