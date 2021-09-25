@@ -57,5 +57,4 @@ inline void backtrace() {
 
 } // namespace debug
 
-
 #endif // SFCMM_BACKTRACE_H

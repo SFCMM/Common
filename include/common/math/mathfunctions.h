@@ -2,15 +2,13 @@
 
 #ifndef SFCMM_MATHFUNCTIONS_H
 #define SFCMM_MATHFUNCTIONS_H
+#include "common/sfcmm_types.h"
 #include <cmath>
 #include <gcem.hpp>
-#include "common/sfcmm_types.h"
 
 namespace detail_ {
-template <class T, class U>
-struct APPROX_ERROR {};
+template <class T, class U> struct APPROX_ERROR {};
 } // namespace detail_
-
 
 /// Approximately equality between two floating numbers.
 /// \tparam T

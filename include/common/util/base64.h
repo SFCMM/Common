@@ -1,12 +1,6 @@
 #ifndef COMMON_BASE64_H
 #define COMMON_BASE64_H
 
-// https://www.binaryconvert.com/result_float.html?hexadecimal=16FBFFBD
-// https://cryptii.com/
-// https://www.h-schmidt.net/FloatConverter/IEEE754.html
-// https://www.scadacore.com/tools/programming-calculators/online-hex-converter/
-// https://www.rapidtables.com/convert/number/binary-to-hex.html
-
 #include "binary.h"
 namespace base64 {
 static constexpr GChar                         maxValue = 64;
@@ -36,20 +30,17 @@ static constexpr GInt mask_fourBitLE = 0x3C;
 // 111110
 static constexpr GInt mask_fiveBitLE = 0x3E;
 
-
 static constexpr std::array<GInt, 7> masks   = {0, mask_firstBit, mask_twoBit, mask_threeBit, mask_fourBit, mask_fiveBit, mask_sixBit};
 static constexpr std::array<GInt, 7> masksLE = {0,          mask_firstBitLE, mask_twoBitLE, mask_threeBitLE, mask_fourBitLE, mask_fiveBitLE,
                                                 mask_sixBit};
 
 constexpr inline static unsigned char encodeChar(const unsigned char c) { return encodeTable[c]; }
 
-
 template <typename T>
 inline static auto encode(const T c) -> GString {
   static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 / 6.0);
   static constexpr GInt shift      = (num_chars - 1) * 6;
   static constexpr GInt init_shift = sizeof(T) * 8 - shift;
-
 
   std::array<GUchar, num_chars> tmp{};
   T                             tmp_val = c;
@@ -63,7 +54,7 @@ inline static auto encode(const T c) -> GString {
 
 template <typename T, GInt length>
 inline static auto encode(T* c) -> GString {
-  static constexpr GInt num_chars  = gcem::ceil(sizeof(T) * 8 * length / 6.0);
+  static constexpr GInt num_chars = gcem::ceil(sizeof(T) * 8 * length / 6.0);
 
   std::array<GUchar, num_chars> encoded_base64{};
   std::bitset<num_chars * 6>    mem{};
@@ -72,7 +63,7 @@ inline static auto encode(T* c) -> GString {
 
   for(GInt i = 0; i < length; ++i) {
     for(GInt byte = 0; byte < sizeof(T); ++byte) {
-      auto tmp_bitset = std::bitset<8>(char_wise[i*sizeof(T) + byte]);
+      auto tmp_bitset = std::bitset<8>(char_wise[i * sizeof(T) + byte]);
       for(GInt bit = 0; bit < 8; ++bit) {
         mem[(length - i - 1) * sizeof(T) * 8 + byte * 8 + bit] = tmp_bitset[bit];
       }
@@ -103,11 +94,11 @@ inline static auto encodeLE(const T c) -> GString {
   return {std::begin(tmp), std::end(tmp)};
 }
 
-template <typename T, GInt length, GInt shifted=0>
+template <typename T, GInt length, GInt shifted = 0>
 inline static auto encodeLE(T* c) -> GString {
-  static constexpr GInt num_chars  = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
+  static constexpr GInt num_chars = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
 
-  std::array<T, length> swapped_endian{};
+  std::array<T, length>         swapped_endian{};
   std::array<GUchar, num_chars> encoded_base64{};
   std::bitset<num_chars * 6>    mem{};
   for(GInt i = 0; i < length; ++i) {
@@ -117,14 +108,14 @@ inline static auto encodeLE(T* c) -> GString {
   auto* char_wise = static_cast<GUchar*>(static_cast<void*>(&swapped_endian[0]));
 
   for(GInt i = 0; i < length; ++i) {
-    for(GInt byte = 0; byte < sizeof(T); ++byte) {
-      auto tmp_bitset = std::bitset<8>(char_wise[i*sizeof(T) + byte]);
+    for(GUint byte = 0; byte < sizeof(T); ++byte) {
+      auto tmp_bitset = std::bitset<8>(char_wise[i * sizeof(T) + byte]);
       for(GInt bit = 0; bit < 8; ++bit) {
-        const GInt index = num_chars * 6 - (i+1) * sizeof(T) * 8 + byte * 8 + bit+shifted;
+        const GInt index = num_chars * 6 - (i + 1) * sizeof(T) * 8 + byte * 8 + bit + shifted;
         if(shifted == 0 || index < num_chars * 6) {
           mem[index] = tmp_bitset[bit];
-        } else if(shifted>0 && tmp_bitset[bit]) {
-          std::cerr << "WARNING: could be wrong" << std::endl; //todo: remove
+        } else if(shifted > 0 && tmp_bitset[bit]) {
+          std::cerr << "WARNING: could be wrong" << std::endl; // todo: remove
         }
       }
     }
@@ -138,46 +129,40 @@ inline static auto encodeLE(T* c) -> GString {
   return {std::begin(encoded_base64), std::end(encoded_base64)};
 }
 
-//todo: merge with above
 template <typename T, GInt shifted = 0>
-inline static auto encodeLE(T *c, const GInt length) -> GString {
+inline static auto encodeLE(T* c, const GInt length) -> GString {
   const GInt num_chars = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
 
-  std::vector<T> swapped_endian(length);
+  std::vector<T>      swapped_endian(length);
   std::vector<GUchar> encoded_base64(num_chars);
-  std::vector<GBool> mem(num_chars * 6);
-  for (GInt i = 0; i < length; ++i) {
+  std::vector<GBool>  mem(num_chars * 6);
+  for(GInt i = 0; i < length; ++i) {
     swapped_endian[i] = binary::getSwappedEndian(c[i]);
   }
 
-  auto *char_wise =
-      static_cast<GUchar *>(static_cast<void *>(&swapped_endian[0]));
+  auto* char_wise = static_cast<GUchar*>(static_cast<void*>(&swapped_endian[0]));
 
-  for (GInt i = 0; i < length; ++i) {
-    for (GInt byte = 0; byte < sizeof(T); ++byte) {
+  for(GInt i = 0; i < length; ++i) {
+    for(GUint byte = 0; byte < sizeof(T); ++byte) {
       auto tmp_bitset = std::bitset<8>(char_wise[i * sizeof(T) + byte]);
-      for (GInt bit = 0; bit < 8; ++bit) {
-        const GInt index =
-            num_chars * 6 - (i + 1) * sizeof(T) * 8 + byte * 8 + bit + shifted;
-        if (shifted == 0 || index < num_chars * 6) {
+      for(GInt bit = 0; bit < 8; ++bit) {
+        const GInt index = num_chars * 6 - (i + 1) * sizeof(T) * 8 + byte * 8 + bit + shifted;
+        if(shifted == 0 || index < num_chars * 6) {
           mem[index] = tmp_bitset[bit];
-        } else if (shifted > 0 && tmp_bitset[bit]) {
+        } else if(shifted > 0 && tmp_bitset[bit]) {
           std::cerr << "WARNING: could be wrong" << std::endl; // todo: remove
         }
       }
     }
   }
 
-  for (GInt i = 0; i < num_chars; ++i) {
-    const GInt num = mem[i * 6] + mem[i * 6 + 1] * 2 + mem[i * 6 + 2] * 4 +
-                     mem[i * 6 + 3] * 8 + mem[i * 6 + 4] * 16 +
-                     mem[i * 6 + 5] * 32;
+  for(GInt i = 0; i < num_chars; ++i) {
+    const GInt num = mem[i * 6] + mem[i * 6 + 1] * 2 + mem[i * 6 + 2] * 4 + mem[i * 6 + 3] * 8 + mem[i * 6 + 4] * 16 + mem[i * 6 + 5] * 32;
     encoded_base64[num_chars - i - 1] = encodeTable[num];
   }
 
   return {std::begin(encoded_base64), std::end(encoded_base64)};
 }
-
 
 } // namespace base64
 

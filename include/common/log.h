@@ -12,7 +12,6 @@
 #include "macros.h"
 #include "util/sys.h"
 
-
 // todo: add tests
 
 class Log_buffer : public std::stringbuf {
@@ -30,7 +29,6 @@ class Log_buffer : public std::stringbuf {
   void setMinFlushSize(GInt minFlushSize) { m_minFlushSize = minFlushSize; }
 
   virtual void close() = 0;
-
 
  protected:
   /**
@@ -494,6 +492,7 @@ class LogFile : public Log {
   }
 
   /**
+   *
    * \brief Pass the close call to the respective internal buffer.
    * \details All attempts to write to the stream after closing it will be discarded.
    */
@@ -527,6 +526,5 @@ class LogFile : public Log {
   bool m_isOpen = false; //!< Stores whether a file was already opened or not
 };
 inline LogFile logger; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
-
 
 #endif // SFCMM_LOG_H

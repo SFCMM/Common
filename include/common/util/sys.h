@@ -56,10 +56,9 @@ inline auto isFile(const std::string& name) -> GBool { return std::filesystem::e
 /// \param path to check
 /// \param generateDir if path doesn't exist create dir (default=false)
 /// \return Path exists?
-inline auto isPath(const std::string &path, const GBool generateDir= false) ->
-    GBool {
+inline auto isPath(const std::string& path, const GBool generateDir = false) -> GBool {
   const GBool existPath = std::filesystem::exists(path);
-  if(!existPath && generateDir){
+  if(!existPath && generateDir) {
     return std::filesystem::create_directory(path);
   }
   return existPath;
