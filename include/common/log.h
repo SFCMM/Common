@@ -137,7 +137,6 @@ class Log_buffer : public std::stringbuf {
               << GString(XSTRINGIFY(COMPILER_VER)) << ")"
               << "\" />\n";
 
-
     // Return XML header
     return tmpBuffer.str();
   }
@@ -492,7 +491,6 @@ class LogFile : public Log {
   }
 
   /**
-   *
    * \brief Pass the close call to the respective internal buffer.
    * \details All attempts to write to the stream after closing it will be discarded.
    */

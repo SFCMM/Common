@@ -95,7 +95,7 @@ inline static auto encodeLE(const T c) -> GString {
 }
 
 template <typename T, GInt length, GInt shifted = 0>
-inline static auto encodeLE(T* c) -> GString {
+inline static auto encodeLE(const T* c) -> GString {
   static constexpr GInt num_chars = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
 
   std::array<T, length>         swapped_endian{};
