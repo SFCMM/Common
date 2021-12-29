@@ -4,7 +4,9 @@
 TEST(Integration, HandlesZeroInput) {
   using namespace integration;
 
-  std::function<GDouble(GDouble)> linear = [](const GDouble x) { return 1; };
+  const double eps = std::numeric_limits<double>::epsilon();
+
+  std::function<GDouble(GDouble)> linear = [](const GDouble /*x*/) { return 1; };
 
   std::function<GDouble(GDouble)> square = [](const GDouble x) { return x; };
 
@@ -23,7 +25,7 @@ TEST(Integration, HandlesZeroInput) {
   static constexpr range range_01  = {0, 1};
   static constexpr range range_011 = {0.1, 1};
   static constexpr range range_02  = {0, 2};
-  static constexpr range range_010  = {0, 10};
+  static constexpr range range_010  = {eps, 10};
 
   static constexpr GDouble ana_lin_range_01 = range_01.b - range_01.a;                                         // 1-0 -> 1
   static constexpr GDouble ana_lin_range_02 = range_02.b - range_02.a;                                         // 2-0 -> 2
@@ -37,7 +39,6 @@ TEST(Integration, HandlesZeroInput) {
   static constexpr GDouble ana_poly3_range_010 = 1490;
   static constexpr GDouble ana_nonlin_range_010 = 1.65835;
 
-  const double eps = std::numeric_limits<double>::epsilon();
 
 
   ASSERT_EQ(gcem::abs(midpoint(range_01, linear) - ana_lin_range_01), 0);
@@ -86,5 +87,15 @@ TEST(Integration, HandlesZeroInput) {
   ASSERT_LT(gcem::abs(multi_midpoint(range_010, nonlin) - ana_nonlin_range_010), 0.163929);
   ASSERT_LT(gcem::abs(multi_midpoint(range_010, nonlin, 10) - ana_nonlin_range_010), 0.003345);
   ASSERT_LT(gcem::abs(multi_midpoint(range_010, nonlin, 100) - ana_nonlin_range_010), 3.02965e-05);
+
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_01, poly2) - ana_poly2_range_01), 0.0416667);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_01, poly2,10) - ana_poly2_range_01), 0.00166668);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_01, poly2, 100) - ana_poly2_range_01), 1.66668e-05);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, poly3) - ana_poly3_range_010), 501);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, poly3, 10) - ana_poly3_range_010), 21);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, poly3, 100) - ana_poly3_range_010), 0.3);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, nonlin) - ana_nonlin_range_010),  2.75328);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, nonlin, 10) - ana_nonlin_range_010), 0.50664);
+  ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, nonlin, 100) - ana_nonlin_range_010), 0.050068);
 
 }

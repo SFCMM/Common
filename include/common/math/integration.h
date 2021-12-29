@@ -25,7 +25,6 @@ inline auto multi_midpoint(const range range, const std::function<GDouble(GDoubl
   GDouble result = 0;
   for(GInt i = 0; i < num_splits; ++i) {
     result += h * f(range.a + 0.5 * h * static_cast<GDouble>(2*i + 1));
-
   }
   return result;
 }
@@ -36,6 +35,19 @@ inline auto trapezoidal(const range range, const std::function<GDouble(GDouble)>
   const GDouble x1 = range.a;
   const GDouble x2 = range.b;
   return 0.5 * h * (f(x1) + f(x2));
+}
+
+inline auto multi_trapezoidal(const range range, const std::function<GDouble(GDouble)>& f, const GInt num_splits=2) -> GDouble {
+  assert(range.a < range.b);
+  const GDouble h        = (range.b - range.a)/static_cast<GDouble>(num_splits);
+  GDouble fprev = f(range.a);
+  GDouble result = 0;
+  for(GInt i = 0; i < num_splits; ++i) {
+    result += 0.5 * h * fprev;
+    fprev  = f(range.a + h * (i+1));
+    result += 0.5 * h * fprev;
+  }
+  return result;
 }
 
 inline auto simpson(const range range, const std::function<GDouble(GDouble)>& f) -> GDouble {
