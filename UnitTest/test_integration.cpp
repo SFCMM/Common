@@ -98,4 +98,14 @@ TEST(Integration, HandlesZeroInput) {
   ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, nonlin, 10) - ana_nonlin_range_010), 0.50664);
   ASSERT_LT(gcem::abs(multi_trapezoidal(range_010, nonlin, 100) - ana_nonlin_range_010), 0.050068);
 
+  ASSERT_LT(gcem::abs(multi_simpson(range_01, poly2) - ana_poly2_range_01), eps);
+  ASSERT_LT(gcem::abs(multi_simpson(range_01, poly2,10) - ana_poly2_range_01), eps);
+  ASSERT_LT(gcem::abs(multi_simpson(range_01, poly2, 100) - ana_poly2_range_01), eps);
+  ASSERT_LT(gcem::abs(multi_simpson(range_010, poly3) - ana_poly3_range_010), 2.27374e-13);
+  ASSERT_LT(gcem::abs(multi_simpson(range_010, poly3, 10) - ana_poly3_range_010), eps);
+  ASSERT_LT(gcem::abs(multi_simpson(range_010, poly3, 100) - ana_poly3_range_010), 6.82122e-13);
+  ASSERT_LT(gcem::abs(multi_simpson(range_010, nonlin) - ana_nonlin_range_010),  0.808476);
+  ASSERT_LT(gcem::abs(multi_simpson(range_010, nonlin, 10) - ana_nonlin_range_010), 0.166648);
+  ASSERT_LT(gcem::abs(multi_simpson(range_010, nonlin, 100) - ana_nonlin_range_010), 0.0166691);
+
 }
