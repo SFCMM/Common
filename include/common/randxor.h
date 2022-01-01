@@ -5,15 +5,19 @@
 
 #include "common/sfcmm_types.h"
 
+/// State of splitmix64
 struct splitmix64_state {
   uint64_t s;
 };
 
+/// State of xoshiro256+
 struct xoshiro256p_state {
   std::array<uint64_t, 4> s = {1, 2, 3, 4};
 };
 
 /// splitmix is used for initialization
+/// \param state Splitmix state
+/// \return Pseudorandom value of the splitmix64 function
 inline uint64_t splitmix64(splitmix64_state* state) {
   uint64_t result = (state->s += 0x9E3779B97f4A7C15);
   result          = (result ^ (result >> 30)) * 0xBF58476D1CE4E5B9;
@@ -21,8 +25,15 @@ inline uint64_t splitmix64(splitmix64_state* state) {
   return result ^ (result >> 31);
 }
 
+///
+/// \param x
+/// \param k
+/// \return
 inline uint64_t rol64(uint64_t x, int k) { return (x << k) | (x >> (64 - k)); }
 
+/// Advance the state of the xoshiro prng
+/// \param state State of the xoshiro prng
+/// \return Pseudo Random value based on the given state function
 inline uint64_t xoshiro256p(xoshiro256p_state* state) {
   uint64_t*      s      = state->s.data();
   const uint64_t result = s[0] + s[3];
@@ -138,6 +149,10 @@ class randxor {
     return val - 1.0;
   }
 
+  /// Generate random double value in [lowerbound, upperbound)
+  /// \param lower_bound lower bound
+  /// \param upper_bound upper bound
+  /// \return Random double value in [lower_bound, upper_bound)
   inline double double_value(double lower_bound, double upper_bound) {
     return (double_value() * (upper_bound - lower_bound)) + lower_bound;
   }
