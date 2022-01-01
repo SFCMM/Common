@@ -358,7 +358,7 @@ GTEST_DEFINE_bool_(
 #if GTEST_USE_OWN_FLAGFILE_FLAG_
 GTEST_DEFINE_string_(
     flagfile, testing::internal::StringFromGTestEnv("flagfile", ""),
-    "This flag specifies the flagfile to read command-line flags from.");
+    "This flag specifies the flagfile to read command-line flags from.")
 #endif  // GTEST_USE_OWN_FLAGFILE_FLAG_
 
 namespace testing {
@@ -4583,7 +4583,7 @@ static std::string FormatTimeInMillisAsDuration(TimeInMillis ms) {
 // Converts the given epoch time in milliseconds to a date string in the
 // RFC3339 format, without the timezone information.
 static std::string FormatEpochTimeInMillisAsRFC3339(TimeInMillis ms) {
-  struct tm time_struct;
+  tm time_struct;
   if (!PortableLocaltime(static_cast<time_t>(ms / 1000), &time_struct))
     return "";
   // YYYY-MM-DDThh:mm:ss

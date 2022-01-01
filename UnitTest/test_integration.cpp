@@ -4,7 +4,7 @@
 TEST(Integration, HandlesZeroInput) {
   using namespace integration;
 
-  const double eps = std::numeric_limits<double>::epsilon();
+  static constexpr double eps = std::numeric_limits<double>::epsilon();
 
   std::function<GDouble(GDouble)> linear = [](const GDouble /*x*/) { return 1; };
 

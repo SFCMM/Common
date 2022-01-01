@@ -42,7 +42,7 @@
       "binaryDir": "${sourceDir}/build/debug-gnu",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS": "$env{APP_GNU_DEFAULT_FLAGS} -Og -g3 -fno-inline -rdynamic -DUSE_ASSERTS"
+        "CMAKE_CXX_FLAGS": "$env{APP_GNU_DEFAULT_FLAGS} -Og -g3 -fno-inline -rdynamic"
       }
     },
     {
@@ -64,7 +64,7 @@
       "binaryDir": "${sourceDir}/build/relwdbg-gnu",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "CMAKE_CXX_FLAGS": "$env{APP_GNU_DEFAULT_FLAGS} -O3 -fno-rtti -fno-exceptions -fomit-frame-pointer -flto -DUSE_ASSERTS -g3"
+        "CMAKE_CXX_FLAGS": "$env{APP_GNU_DEFAULT_FLAGS} -O3 -fno-rtti -fno-exceptions -fomit-frame-pointer -flto -g3"
       }
     },
     {
@@ -120,7 +120,7 @@
       "binaryDir": "${sourceDir}/build/debug-clang",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS": "$env{APP_CLANG_DEFAULT_FLAGS} -Og -g3 -fno-inline -DUSE_ASSERTS"
+        "CMAKE_CXX_FLAGS": "$env{APP_CLANG_DEFAULT_FLAGS} -Og -g3 -fno-inline"
       }
     },
     {

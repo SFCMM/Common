@@ -106,7 +106,7 @@ GTEST_DEFINE_string_(
     "\"threadsafe\" (child process re-executes the test binary "
     "from the beginning, running only the specific death test) or "
     "\"fast\" (child process runs the death test immediately "
-    "after forking).");
+    "after forking).")
 
 GTEST_DEFINE_bool_(
     death_test_use_fork,
@@ -118,7 +118,7 @@ GTEST_DEFINE_bool_(
     "it sees an unsupported combination of clone() flags. "
     "It is not recommended to use this flag w/o valgrind though it will "
     "work in 99% of the cases. Once valgrind is fixed, this flag will "
-    "most likely be removed.");
+    "most likely be removed.")
 
 GTEST_DEFINE_string_(
     internal_run_death_test, "",
@@ -127,7 +127,7 @@ GTEST_DEFINE_string_(
     "which a success code may be sent, all separated by "
     "the '|' characters.  This flag is specified if and only if the "
     "current process is a sub-process launched for running a thread-safe "
-    "death test.  FOR INTERNAL USE ONLY.");
+    "death test.  FOR INTERNAL USE ONLY.")
 
 namespace testing {
 
