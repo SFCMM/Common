@@ -26,7 +26,7 @@ static constexpr inline auto oppositeDir(const GInt dir) -> GInt {
     return dir + 1 - 2 * (dir % 2);
   }
   if constexpr(NDIM == 2) {
-    return dir > 5? dir-2:dir+2;
+    return dir > 5 ? dir - 2 : dir + 2;
   }
 }
 

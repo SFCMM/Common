@@ -129,8 +129,8 @@ class randxor {
   inline auto uinteger_value(uint32_t lower_bound, uint32_t upper_bound) -> uint64_t {
     assert(upper_bound > lower_bound);
 
-    return ((static_cast<uint64_t> (static_cast<uint32_t>(uinteger_value())) * static_cast<uint64_t> (upper_bound - lower_bound)) >> 32) +
-           static_cast<uint64_t> (lower_bound);
+    return ((static_cast<uint64_t>(static_cast<uint32_t>(uinteger_value())) * static_cast<uint64_t>(upper_bound - lower_bound)) >> 32)
+           + static_cast<uint64_t>(lower_bound);
   }
 
 
