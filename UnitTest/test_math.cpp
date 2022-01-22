@@ -4,6 +4,7 @@
 TEST(MathApprox, HandlesZeroInput) {
   const double eps = std::numeric_limits<double>::epsilon();
   ASSERT_TRUE(approx(1.0, 1.0, eps));
+  ASSERT_TRUE(approx(1.0, 1.0));
   ASSERT_FALSE(approx(1.0, 1.0 + eps, eps));
   ASSERT_TRUE(approx(1.0, 1.0 + eps, 2*eps));
 
