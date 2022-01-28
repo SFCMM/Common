@@ -5,9 +5,6 @@
 
 #include <gcem.hpp>
 #include <cassert>
-#include <iostream>
-#include <array>
-#include "../sfcmm_types.h"
 
 namespace cartesian {
 
@@ -160,14 +157,14 @@ static constexpr std::array<std::array<GDouble, cartesian::maxNoNghbrs<sfcmm::MA
 /// \param dir1 Direction 1
 /// \param dir2 Direction 2
 /// \return Direction diagonal between these
-template<GInt NDIM>
+template <GInt NDIM>
 static constexpr auto inbetweenDiagDirs(GInt /*dir1*/, GInt /*dir2*/) -> GInt {
   std::cerr << "Invalid dist in inbetweenDiagDirs() " << std::endl;
   std::exit(-1);
   return -1;
 }
 
-template<>
+template <>
 constexpr auto inbetweenDiagDirs<2>(GInt dir1, GInt dir2) -> GInt {
   if(dir2 < dir1) {
     GInt tmp = dir2;
@@ -192,27 +189,46 @@ constexpr auto inbetweenDiagDirs<2>(GInt dir1, GInt dir2) -> GInt {
       }
       break;
     default:
-      std::cerr <<"Invalid dist in inbetweenDiagDirs<2>()" << std::endl;
+      std::cerr << "Invalid dist in inbetweenDiagDirs<2>()" << std::endl;
       std::exit(-1);
   }
+  return -1;
 }
 
 /// Return the direction unit vector.
 /// \tparam NDIM Dimensionality
 /// \param dir Direction
 /// \return Unit vector of the corresponding direction
-template<GInt NDIM>
+template <GInt NDIM>
 inline auto dirVec(GInt /*dir*/) -> VectorD<NDIM> {
-  std::cerr <<"Invalid dir in dirVec()" << std::endl;
+  std::cerr << "Invalid dir in dirVec()" << std::endl;
   std::exit(-1);
   VectorD<NDIM> tmp;
   tmp.fill(NAN);
   return tmp;
 }
 
-template<>
+template <>
+inline auto dirVec<1>(GInt dir) -> VectorD<1> {
+  VectorD<1> tmp;
+  switch(dir) {
+    case 0:
+      tmp.fill(-1);
+      return tmp;
+    case 1:
+      tmp.fill(1);
+      return tmp;
+    default:
+      std::cerr << "Invalid dir in dirVec<1>()" << std::endl;
+      std::exit(-1);
+  }
+  tmp.fill(NAN);
+  return tmp;
+}
+
+template <>
 inline auto dirVec<2>(GInt dir) -> VectorD<2> {
-  switch(dir){
+  switch(dir) {
     case 0:
       return {-1, 0};
     case 1:
