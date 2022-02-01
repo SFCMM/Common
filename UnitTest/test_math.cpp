@@ -16,3 +16,8 @@ TEST(MathApprox, HandlesZeroInput) {
   ASSERT_TRUE(isEven(2));
   ASSERT_FALSE(isEven(1));
 }
+
+TEST(MathRadians, HandlesZeroInput){
+  ASSERT_EQ(toRadians(0), 0);
+  ASSERT_EQ(toRadians(180), M_PI);
+}
