@@ -7,6 +7,7 @@
 #include "../sfcmm_types.h"
 
 /// Obtain a point on a circular shell with the given plane around the center (0.0, 0.0, 0.0) given a diameter and angle.
+/// Note: Rotation is anticlockwise but axes order is not guaranteed
 /// \param[in] normal The plane's normal vector.
 /// \param[in] diameter Diameter of the circle.
 /// \param[in] phi Angle of the point
