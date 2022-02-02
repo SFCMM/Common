@@ -8,8 +8,18 @@
 #include "randxor.h"
 #include "sfcmm_types.h"
 
-/// Obtain a point on a circular shell with the given plane around the center (0.0, 0.0, 0.0) given a diameter and angle.
-/// Note: Rotation is anticlockwise but axes order is not guaranteed
+/// Obtain a random point in a circle on the given plane by the normal around the center (0.0, 0.0, 0.0).
+/// \param[in] normal The plane's normal vector.
+/// \param[in] diameter Diameter of the circle.
+/// \param[in] prng Random number generator reference
+/// \return Point on the defined circle.
+inline auto randomPoint_inCircle(const VectorD<3>& normal, const GDouble diameter, randxor& prng) -> VectorD<3> {
+  const GDouble random_angle    = prng.double_value(0, 2 * M_PI + GDoubleEps);
+  const GDouble random_diameter = prng.double_value() * diameter;
+  return pointOnCircleShell(normal, random_diameter, random_angle);
+}
+
+/// Obtain a random point on a circular shell with the given plane by the normal  around the center (0.0, 0.0, 0.0).
 /// \param[in] normal The plane's normal vector.
 /// \param[in] diameter Diameter of the circle.
 /// \param[in] prng Random number generator reference
