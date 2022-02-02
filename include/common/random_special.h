@@ -4,8 +4,20 @@
 #define COMMON_RANDOM_SPECIAL_H
 
 #include "gcem.hpp"
+#include "geometry/circle.h"
 #include "randxor.h"
 #include "sfcmm_types.h"
+
+/// Obtain a point on a circular shell with the given plane around the center (0.0, 0.0, 0.0) given a diameter and angle.
+/// Note: Rotation is anticlockwise but axes order is not guaranteed
+/// \param[in] normal The plane's normal vector.
+/// \param[in] diameter Diameter of the circle.
+/// \param[in] prng Random number generator reference
+/// \return Point on the defined circle.
+inline auto randomPoint_onCircleShell(const VectorD<3>& normal, const GDouble diameter, randxor& prng) -> VectorD<3> {
+  const GDouble random_angle = prng.double_value(0, 2 * M_PI + GDoubleEps);
+  return pointOnCircleShell(normal, diameter, random_angle);
+}
 
 /// Generate a random value using the Rosin-Rammler distribution. This often used for the size distribution of droplets during injection.
 /// \tparam RR_SPREAD Constant spread factor
