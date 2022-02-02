@@ -48,3 +48,23 @@ TEST(random_pointInCircle, HandlesZeroInput) {
   ASSERT_DOUBLE_EQ(result[1], -0.2632129873189582);
   ASSERT_DOUBLE_EQ(result[2], 0.076022648807890558);
 }
+
+TEST(random_cone, HandlesZeroInput) {
+  randxor randgen(1256);
+
+  const VectorD<3> coneAxis({1, 0, 0});
+  VectorD<3>       result = randomNormalizedDirection_inCone(coneAxis, 20, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0.95519460763768405);
+  ASSERT_DOUBLE_EQ(result[1], 0.27283499754191665);
+  ASSERT_DOUBLE_EQ(result[2], 0.1147358952385584);
+
+  result = randomNormalizedDirection_inCone(coneAxis, 45, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0.98968176331264135);
+  ASSERT_DOUBLE_EQ(result[1], -0.038066032226745206);
+  ASSERT_DOUBLE_EQ(result[2], 0.13813393702089793);
+
+  result = randomNormalizedDirection_inCone(coneAxis, 0, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 1);
+  ASSERT_DOUBLE_EQ(result[1], 0);
+  ASSERT_DOUBLE_EQ(result[2], 0);
+}
