@@ -3,6 +3,8 @@
 #ifndef GRIDGENERATOR_TRIANGLE_H
 #define GRIDGENERATOR_TRIANGLE_H
 
+#include "../util/string_helper.h"
+
 // namespace to hide local point definition
 namespace triangle_ {
 template <GInt NDIM>
