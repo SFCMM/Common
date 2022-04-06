@@ -164,7 +164,14 @@ inline static auto encodeLE(const T* c) -> GString {
 /// \param c Values to be encoded.
 /// \return String of the encoded array.
 template <typename T, GInt shifted = 0>
-inline static auto encodeLE(T* c, const GInt length) -> GString {
+inline static auto encodeLE(const T* c, const GInt length) -> GString {
+  // Nothing to do for length 0
+  if(length == 0) {
+    std::cerr << "ERROR: Invalid call to encodeLE() with length = 0" << std::endl;
+    std::exit(-1);
+    // return "";
+  }
+
   const GInt num_chars = gcem::ceil((sizeof(T) * 8 * length - shifted) / 6.0);
 
   std::vector<T>      swapped_endian(length);
@@ -174,7 +181,7 @@ inline static auto encodeLE(T* c, const GInt length) -> GString {
     swapped_endian[i] = binary::getSwappedEndian(c[i]);
   }
 
-  auto* char_wise = static_cast<GUchar*>(static_cast<void*>(&swapped_endian[0]));
+  auto* char_wise = static_cast<GUchar*>(static_cast<void*>(swapped_endian.data()));
 
   for(GInt i = 0; i < length; ++i) {
     for(GUint byte = 0; byte < sizeof(T); ++byte) {
