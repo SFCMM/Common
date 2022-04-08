@@ -39,7 +39,7 @@ TEST(Base64, HandlesZeroInput) {
   ASSERT_EQ(base64::encode(static_cast<GInt>(384)), "AAAAAAAAAGA");
   // I      A      B      A
   // 001000 000000 000001 0000000000000000000000000000000000000000000000
-  ASSERT_EQ(base64::encode(binary::getSwappedEndian(static_cast<GInt>(384))), "IABAAAAAAAA"); // this is incorrect for LE!
+  ASSERT_EQ(base64::encode(binary::getSwappedEndian(static_cast<GInt>(384))), "IABAAAAAAAA"); // this is incorrect for LE! (see below)
   // g      A      E      A  (Note: little endian is filled with 0 from right!!!!)
   // 100000 000000 000100 0000000000000000000000000000000000000000000000
   ASSERT_EQ(base64::encodeLE(static_cast<GInt>(384)), "gAEAAAAAAAA");
@@ -54,6 +54,7 @@ TEST(Base64, HandlesZeroInput) {
   // A      W      +      /      +      9
   // 000000 010110 111110 111111 111110 111101
   ASSERT_EQ(base64::encode(binary::getSwappedEndian(static_cast<GFloat>(-0.12499062716960907))), "AW+/+9"); // this is incorrect for LE!
+                                                                                                            // (see below)
   // F      v      v      /      v      Q
   // 000101 101111 101111 111111 101111 010000
   ASSERT_EQ(base64::encodeLE(static_cast<GFloat>(-0.12499062716960907)), "Fvv/vQ");
@@ -64,6 +65,11 @@ TEST(Base64, HandlesZeroInput) {
   // 001011 111110 111111 111111 110110 001011 000000 000000 000000 000000 000000
   ASSERT_EQ(base64::encode(static_cast<GDouble>(-0.12499062716960907)), "L+//2LAAAAA");
   ASSERT_EQ(base64::encodeLE(static_cast<GDouble>(-0.12499062716960907)), "AAAAwGL/v78");
+
+  std::array<GDouble, 2> testList = {0.125, 1.0};
+  ASSERT_EQ(base64::encodeLE(testList.data(), 2), "AAAAAAAAwD8AAAAAAADwPw");
+  ASSERT_EQ((base64::encodeLE_header(testList.data(), 2)), "EAAAAAAAAAAAAMA/AAAAAAAA8D8");
+
 
   // A      B
   // 000000 000001
