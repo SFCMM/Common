@@ -67,4 +67,36 @@ TEST(random_cone, HandlesZeroInput) {
   ASSERT_DOUBLE_EQ(result[0], 1);
   ASSERT_DOUBLE_EQ(result[1], 0);
   ASSERT_DOUBLE_EQ(result[2], 0);
+
+  const VectorD<3> coneAxis_Y({0, 1, 0});
+  result = randomNormalizedDirection_inCone(coneAxis_Y, 20, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0.061034611897338081);
+  ASSERT_DOUBLE_EQ(result[1], 0.99781149596146457);
+  ASSERT_DOUBLE_EQ(result[2], -0.025436090062851965);
+
+  result = randomNormalizedDirection_inCone(coneAxis_Y, 45, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0.46446424713425211);
+  ASSERT_DOUBLE_EQ(result[1], 0.88325534887950352);
+  ASSERT_DOUBLE_EQ(result[2], 0.064288037843436174);
+
+  result = randomNormalizedDirection_inCone(coneAxis_Y, 0, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0);
+  ASSERT_DOUBLE_EQ(result[1], 1);
+  ASSERT_DOUBLE_EQ(result[2], 0);
+
+  const VectorD<3> coneAxis_Z({0, 0, 1});
+  result = randomNormalizedDirection_inCone(coneAxis_Z, 20, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0.080262557015358851);
+  ASSERT_DOUBLE_EQ(result[1], 0.23450379787677678);
+  ASSERT_DOUBLE_EQ(result[2], 0.96879610379208492);
+
+  result = randomNormalizedDirection_inCone(coneAxis_Z, 45, randgen);
+  ASSERT_DOUBLE_EQ(result[0], -0.5714102447905629);
+  ASSERT_DOUBLE_EQ(result[1], -0.18610386979083313);
+  ASSERT_DOUBLE_EQ(result[2], 0.79928448114377015);
+
+  result = randomNormalizedDirection_inCone(coneAxis_Z, 0, randgen);
+  ASSERT_DOUBLE_EQ(result[0], 0);
+  ASSERT_DOUBLE_EQ(result[1], 0);
+  ASSERT_DOUBLE_EQ(result[2], 1);
 }
