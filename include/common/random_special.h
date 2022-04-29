@@ -18,7 +18,7 @@ enum class Random_Dist { none, normal };
 /// \param distAttrb Distribution attribute (default: 0)
 /// \return A random normalized direction within the defined cone.
 inline auto randomNormalizedDirection_inCone(const VectorD<3>& coneAxis, const GDouble openingAngle, randxor& prng,
-                                             const Random_Dist dist = Random_Dist::none, const GDouble distAttrb = 0.0) -> VectorD<3> {
+                                             const Random_Dist /*dist*/ = Random_Dist::none, const GDouble /*distAttrb*/ = 0.0) -> VectorD<3> {
   // angle between center cone axis and cone shell
   GDouble distedAngle = 0;
   // todo: implement
@@ -70,12 +70,12 @@ inline auto randomNormalizedDirection_inCone(const VectorD<3>& coneAxis, const G
   v2 = v2.normalized();
 
   // random point on unit circle
-  const GDouble phi = prng.double_value(0, 2*M_PI);
+  const GDouble phi = prng.double_value(0, 2 * M_PI);
 
   // random angle within the given opening angle
   const GDouble omega = gcem::acos(prng.double_value(gcem::cos(coneAngleRad), 1.0));
 
-  VectorD<3> tmp =  gcem::sin(omega) * ( gcem::cos(phi) * v1 +  gcem::sin(phi) * v2) +  gcem::cos(omega) * centerAxis;
+  VectorD<3> tmp = gcem::sin(omega) * (gcem::cos(phi) * v1 + gcem::sin(phi) * v2) + gcem::cos(omega) * centerAxis;
 
   // 3. Use orthonormal basis to determine points on circle
   return tmp.normalized();
