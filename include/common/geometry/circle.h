@@ -13,7 +13,6 @@
 /// \param[in] phi Angle of the point
 /// \return Point on the defined circle.
 inline auto pointOnCircleShell(const VectorD<3>& normal, const GDouble diameter, const GDouble phi) -> VectorD<3> {
-
   // 1. normalize centerAxis
   VectorD<3> centerAxis = normal.normalized();
 

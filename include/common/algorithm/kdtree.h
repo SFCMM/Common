@@ -64,7 +64,7 @@ class KDTree {
     // analytical geometries have 1
     // STLs 1 for each triangle
     const GInt noNodes = geometryM.noElements();
-    m_boundingBox = BoundingBoxCT<NDIM>(geometryM.getBoundingBox());
+    m_boundingBox      = BoundingBoxCT<NDIM>(geometryM.getBoundingBox());
 
     // allocate memory
     allocateMem(noNodes);
@@ -77,8 +77,8 @@ class KDTree {
 
     std::vector<OffsetType> offset;
     offset.resize(noNodes);
-    offset[m_root].from      = 0;
-    offset[m_root].to        = noNodes - 1;
+    offset[m_root].from = 0;
+    offset[m_root].to   = noNodes - 1;
 
     if(noNodes == 1) {
       singleNodeTree();
@@ -178,7 +178,7 @@ class KDTree {
     // analytical geometries have 1
     // STLs one for each triangle
     const GInt noNodes = triangles.size();
-    m_boundingBox = BoundingBoxCT<NDIM>(bbox);
+    m_boundingBox      = BoundingBoxCT<NDIM>(bbox);
 
     // allocate memory
     allocateMem(noNodes);
@@ -191,8 +191,8 @@ class KDTree {
 
     std::vector<OffsetType> offset;
     offset.resize(noNodes);
-    offset.at(m_root).from   = 0;
-    offset.at(m_root).to     = noNodes - 1;
+    offset.at(m_root).from = 0;
+    offset.at(m_root).to   = noNodes - 1;
 
     if(noNodes == 1) {
       singleNodeTree();
@@ -444,13 +444,10 @@ class KDTree {
     m_nodeList.clear();
   }
 
-  void allocateMem(const GInt noNodes){
-    m_nodes.resize(noNodes);
+  void allocateMem(const GInt noNodes) { m_nodes.resize(noNodes); }
 
-  }
-
-  void singleNodeTree(){
-    if(m_nodes.size() == 1){
+  void singleNodeTree() {
+    if(m_nodes.size() == 1) {
       // with one node we don't need to search so we just return the root element anyway
       m_nodes[0].m_leftSubtree  = 0;
       m_nodes[0].m_rightSubtree = 0;

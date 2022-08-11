@@ -6,11 +6,13 @@
 #include <array>
 #include <limits>
 #include <vector>
+#include <iostream>
 #include "sfcmm_types.h"
 
 static constexpr GInt    BASE2          = 2;
 static constexpr GDouble HALF           = 0.5;
 static constexpr GInt    INVALID_CELLID = -1;
+static constexpr GInt    INVALID_DIR    = -1;
 
 static constexpr GDouble PI = 3.141592653589793238462643383279;
 
@@ -98,5 +100,28 @@ static inline auto resolveGeomType(const GString& type) -> GeomType {
 
 enum class DirId { mX, pX, mY, pY, mZ, pZ };
 static constexpr std::array<std::string_view, 6> DirIdString = {"-x", "+x", "-y", "+y", "-z", "+z"};
+
+static inline auto dirIdString2Id(const GString& dirId) -> GInt {
+  if(dirId == "-x") {
+    return 0;
+  }
+  if(dirId == "+x") {
+    return 1;
+  }
+  if(dirId == "-y") {
+    return 2;
+  }
+  if(dirId == "+y") {
+    return 3;
+  }
+  if(dirId == "-z") {
+    return 4;
+  }
+  if(dirId == "+z") {
+    return 5;
+  }
+  std::cerr << "ERROR: Invalid direction " << dirId << std::endl;
+  std::exit(-1);
+}
 
 #endif
