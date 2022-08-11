@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1658499856263,
+  "lastUpdate": 1660247628284,
   "repoUrl": "https://github.com/SFCMM/Common",
   "entries": {
     "bench-gnu": [
@@ -6960,6 +6960,180 @@ window.BENCHMARK_DATA = {
             "value": 154.04761481455247,
             "unit": "ns/iter",
             "extra": "iterations: 4544720\ncpu: 153.90329877308181 ns\nthreads: 1"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "berger.sven@gmail.com",
+            "name": "svchb",
+            "username": "svchb"
+          },
+          "committer": {
+            "email": "berger.sven@gmail.com",
+            "name": "svchb",
+            "username": "svchb"
+          },
+          "distinct": true,
+          "id": "415cd9bd56b1149a244fee670fa77e2e9943c4ce",
+          "message": "merge",
+          "timestamp": "2022-08-11T21:48:40+02:00",
+          "tree_id": "fe19d5ed0f03b5cab8309bfa2da8458ce4e34108",
+          "url": "https://github.com/SFCMM/Common/commit/415cd9bd56b1149a244fee670fa77e2e9943c4ce"
+        },
+        "date": 1660247625366,
+        "tool": "googlecpp",
+        "benches": [
+          {
+            "name": "BM_Hilbert2D/1",
+            "value": 2.4601542026441727,
+            "unit": "ns/iter",
+            "extra": "iterations: 285207431\ncpu: 2.4600495069148463 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/2",
+            "value": 3.349616608794831,
+            "unit": "ns/iter",
+            "extra": "iterations: 209221153\ncpu: 3.3492502548248564 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/3",
+            "value": 4.030224748582968,
+            "unit": "ns/iter",
+            "extra": "iterations: 173913043\ncpu: 4.028752461079071 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/4",
+            "value": 5.744507903133854,
+            "unit": "ns/iter",
+            "extra": "iterations: 121722407\ncpu: 5.744087035676185 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/5",
+            "value": 7.589001209684942,
+            "unit": "ns/iter",
+            "extra": "iterations: 91744562\ncpu: 7.588453035505263 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/6",
+            "value": 9.548104026293045,
+            "unit": "ns/iter",
+            "extra": "iterations: 72803594\ncpu: 9.547814356527509 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/7",
+            "value": 11.650423862625962,
+            "unit": "ns/iter",
+            "extra": "iterations: 60086095\ncpu: 11.649655381998105 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/8",
+            "value": 14.254675213246077,
+            "unit": "ns/iter",
+            "extra": "iterations: 49165244\ncpu: 14.25355887585954 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/9",
+            "value": 17.310224991032364,
+            "unit": "ns/iter",
+            "extra": "iterations: 40416544\ncpu: 17.309278101561574 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert2D/10",
+            "value": 19.992675206209217,
+            "unit": "ns/iter",
+            "extra": "iterations: 35092592\ncpu: 19.99174355658882 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/1",
+            "value": 2.007422463263853,
+            "unit": "ns/iter",
+            "extra": "iterations: 348752686\ncpu: 2.0072834650512195 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/2",
+            "value": 3.3454236646878526,
+            "unit": "ns/iter",
+            "extra": "iterations: 209239978\ncpu: 3.3452675090608146 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/3",
+            "value": 5.687027898509342,
+            "unit": "ns/iter",
+            "extra": "iterations: 123084498\ncpu: 5.68652357829821 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/4",
+            "value": 8.697881504477886,
+            "unit": "ns/iter",
+            "extra": "iterations: 80472627\ncpu: 8.69766063434216 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/5",
+            "value": 11.710236168929237,
+            "unit": "ns/iter",
+            "extra": "iterations: 59761841\ncpu: 11.71009942615387 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/6",
+            "value": 14.740077065907498,
+            "unit": "ns/iter",
+            "extra": "iterations: 47502457\ncpu: 14.7391597028339 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/7",
+            "value": 18.56148175982921,
+            "unit": "ns/iter",
+            "extra": "iterations: 37868890\ncpu: 18.560897876858824 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/8",
+            "value": 21.99697740258872,
+            "unit": "ns/iter",
+            "extra": "iterations: 31969193\ncpu: 21.9949781028254 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/9",
+            "value": 24.954666802762503,
+            "unit": "ns/iter",
+            "extra": "iterations: 28039143\ncpu: 24.95248160758694 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_Hilbert3D/10",
+            "value": 28.69474030640367,
+            "unit": "ns/iter",
+            "extra": "iterations: 24463079\ncpu: 28.6928599625583 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_memcpy/8",
+            "value": 3.0111348877166777,
+            "unit": "ns/iter",
+            "extra": "iterations: 232504455\ncpu: 3.0109758542046094 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_memcpy/64",
+            "value": 2.676658993658402,
+            "unit": "ns/iter",
+            "extra": "iterations: 261540180\ncpu: 2.6765218254418883 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_memcpy/512",
+            "value": 9.709614318940316,
+            "unit": "ns/iter",
+            "extra": "iterations: 91623037\ncpu: 9.709212105684742 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_memcpy/1024",
+            "value": 17.77032220615656,
+            "unit": "ns/iter",
+            "extra": "iterations: 50660174\ncpu: 17.768916466808808 ns\nthreads: 1"
+          },
+          {
+            "name": "BM_memcpy/8192",
+            "value": 171.094735930913,
+            "unit": "ns/iter",
+            "extra": "iterations: 4366717\ncpu: 171.0872034986459 ns\nthreads: 1"
           }
         ]
       }
